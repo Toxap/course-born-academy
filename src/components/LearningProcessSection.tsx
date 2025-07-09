@@ -1,9 +1,7 @@
 import { useState, useEffect, useRef } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { ChevronLeft, ChevronRight, BookOpen, Users, Award, Lightbulb, Target, Code } from "lucide-react";
+import { BookOpen, Users, Award, Lightbulb, Target, Code } from "lucide-react";
 
 const LearningProcessSection = () => {
-  const [activeStep, setActiveStep] = useState(0);
   const [visibleBlocks, setVisibleBlocks] = useState<number[]>([]);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -12,37 +10,43 @@ const LearningProcessSection = () => {
       title: "Моделирование реального опыта",
       icon: BookOpen,
       description: "Ты занимаешься в том же режиме как и Твоя же профессиональная IT-деятельность. Будут использоваться те же методы выстраивания рабочих процессов.",
-      highlight: "реальный опыт"
+      highlight: "реальный опыт",
+      shape: "circle"
     },
     {
       title: "Сочетание разных форматов",
       icon: Users,
       description: "Тебе дают видеоуроки, текстовые лекции, практические задания, аудиоконференции, самостоятельные и командные задания.",
-      highlight: "разные форматы"
+      highlight: "разные форматы",
+      shape: "square"
     },
     {
       title: "Востребованность студентов",
       icon: Award,
       description: "Образовательные программы построены таким образом, что 80% всего обучения — это практика с целью максимально приблизить рабочие ситуации.",
-      highlight: "80% практики"
+      highlight: "80% практики",
+      shape: "triangle"
     },
     {
       title: "Интенсивный формат обучения",  
       icon: Target,
       description: "Мы стараемся максимально быстро и эффективно освоить профессию, включая теоретические основы и практические исследования.",
-      highlight: "быстро и эффективно"
+      highlight: "быстро и эффективно",
+      shape: "hexagon"
     },
     {
       title: "Постоянная поддержка",
       icon: Lightbulb,
       description: "В процессе обучения предусмотрены наставники — действующие разработчики, а также куратор и сообщество таких выпускников.",
-      highlight: "24/7 поддержка"
+      highlight: "24/7 поддержка",
+      shape: "diamond"
     },
     {
       title: "Лучшие практики индустрии",
       icon: Code,
       description: "В обучении используем лучшие практики и методики из индустрии, а также актуальные инструменты программирования.",
-      highlight: "лучшие практики"
+      highlight: "лучшие практики",
+      shape: "star"
     }
   ];
 
@@ -54,7 +58,7 @@ const LearningProcessSection = () => {
             processes.forEach((_, index) => {
               setTimeout(() => {
                 setVisibleBlocks(prev => [...prev, index]);
-              }, index * 150);
+              }, index * 200);
             });
           }
         });
@@ -69,6 +73,28 @@ const LearningProcessSection = () => {
     return () => observer.disconnect();
   }, []);
 
+  const getShapeClasses = (shape: string, isVisible: boolean) => {
+    const baseClasses = "w-16 h-16 flex items-center justify-center transition-all duration-500";
+    const visibleClasses = isVisible ? "scale-100 opacity-100" : "scale-0 opacity-0";
+    
+    switch (shape) {
+      case "circle":
+        return `${baseClasses} ${visibleClasses} rounded-full bg-gradient-to-br from-blue-500 to-cyan-500`;
+      case "square":
+        return `${baseClasses} ${visibleClasses} rounded-lg bg-gradient-to-br from-purple-500 to-pink-500`;
+      case "triangle":
+        return `${baseClasses} ${visibleClasses} bg-gradient-to-br from-green-500 to-emerald-500 transform rotate-45`;
+      case "hexagon":
+        return `${baseClasses} ${visibleClasses} bg-gradient-to-br from-orange-500 to-red-500 transform rotate-12`;
+      case "diamond":
+        return `${baseClasses} ${visibleClasses} bg-gradient-to-br from-indigo-500 to-blue-500 transform rotate-45`;
+      case "star":
+        return `${baseClasses} ${visibleClasses} bg-gradient-to-br from-yellow-500 to-orange-500 rounded-sm transform rotate-12`;
+      default:
+        return `${baseClasses} ${visibleClasses} rounded-full bg-gradient-to-br from-gray-500 to-gray-600`;
+    }
+  };
+
   return (
     <section ref={sectionRef} className="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
       {/* Background decorations */}
@@ -77,7 +103,7 @@ const LearningProcessSection = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-20">
           <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-6 py-2 rounded-full text-sm font-medium mb-6">
             ⚡ Премиальный опыт образования
           </div>
@@ -90,13 +116,44 @@ const LearningProcessSection = () => {
           </p>
         </div>
 
-        {/* Process blocks */}
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Process timeline */}
+        <div className="max-w-5xl mx-auto relative">
+          {/* Zigzag line SVG */}
+          <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 800 600" fill="none">
+            <path
+              d="M100 50 L200 50 L250 100 L350 100 L400 150 L500 150 L550 200 L650 200 L700 250 L750 250"
+              stroke="url(#gradient1)"
+              strokeWidth="3"
+              strokeDasharray="8,4"
+              className="animate-pulse"
+            />
+            <path
+              d="M100 300 L150 300 L200 350 L300 350 L350 400 L450 400 L500 450 L600 450 L650 500 L700 500"
+              stroke="url(#gradient2)"
+              strokeWidth="3"
+              strokeDasharray="8,4"
+              className="animate-pulse"
+              style={{ animationDelay: "1s" }}
+            />
+            <defs>
+              <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#3b82f6" />
+                <stop offset="50%" stopColor="#06b6d4" />
+                <stop offset="100%" stopColor="#8b5cf6" />
+              </linearGradient>
+              <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#f59e0b" />
+                <stop offset="50%" stopColor="#ef4444" />
+                <stop offset="100%" stopColor="#8b5cf6" />
+              </linearGradient>
+            </defs>
+          </svg>
+
+          {/* Process items */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 relative z-10">
             {processes.map((process, index) => {
               const IconComponent = process.icon;
               const isVisible = visibleBlocks.includes(index);
-              const isActive = activeStep === index;
               
               return (
                 <div
@@ -106,97 +163,58 @@ const LearningProcessSection = () => {
                       ? 'opacity-100 translate-y-0' 
                       : 'opacity-0 translate-y-8'
                   }`}
-                  style={{ transitionDelay: `${index * 100}ms` }}
+                  style={{ transitionDelay: `${index * 150}ms` }}
                 >
-                  <Card 
-                    className={`h-full bg-white border-2 transition-all duration-300 cursor-pointer group hover:-translate-y-2 hover:shadow-2xl ${
-                      isActive 
-                        ? 'border-blue-500 shadow-lg shadow-blue-500/20' 
-                        : 'border-gray-200 hover:border-blue-300'
-                    }`}
-                    onClick={() => setActiveStep(index)}
-                  >
-                    <CardContent className="p-8 h-full flex flex-col">
-                      {/* Icon and badge */}
-                      <div className="flex items-start justify-between mb-6">
-                        <div className={`p-4 rounded-2xl transition-all duration-300 ${
-                          isActive 
-                            ? 'bg-gradient-to-br from-blue-500 to-cyan-500 shadow-lg shadow-blue-500/30' 
-                            : 'bg-gradient-to-br from-gray-100 to-gray-200 group-hover:from-blue-500 group-hover:to-cyan-500'
-                        }`}>
-                          <IconComponent className={`h-7 w-7 transition-colors duration-300 ${
-                            isActive ? 'text-white' : 'text-gray-700 group-hover:text-white'
-                          }`} />
-                        </div>
-                        <div className="bg-gradient-to-r from-orange-400 to-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full">
-                          {String(index + 1).padStart(2, '0')}
-                        </div>
-                      </div>
-                      
-                      {/* Highlight badge */}
-                      <div className="inline-flex items-center bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-700 px-3 py-1 rounded-full text-sm font-medium mb-4 w-fit">
-                        {process.highlight}
-                      </div>
-                      
-                      {/* Title */}
-                      <h3 className="text-xl font-bold mb-4 text-gray-900 group-hover:text-blue-900 transition-colors duration-300">
-                        {process.title}
-                      </h3>
-                      
-                      {/* Description */}
-                      <p className="text-gray-600 leading-relaxed flex-grow group-hover:text-gray-700 transition-colors duration-300">
-                        {process.description}
-                      </p>
-                      
-                      {/* Active indicator */}
-                      {isActive && (
-                        <div className="mt-6 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full"></div>
-                      )}
-                    </CardContent>
-                  </Card>
+                  {/* Shape container */}
+                  <div className="flex flex-col items-center mb-6">
+                    <div className={getShapeClasses(process.shape, isVisible)}>
+                      <IconComponent className="h-8 w-8 text-white" />
+                    </div>
+                    
+                    {/* Connection dot */}
+                    <div className={`w-4 h-4 rounded-full mt-4 transition-all duration-500 ${
+                      isVisible 
+                        ? 'bg-gradient-to-r from-blue-500 to-cyan-500 scale-100' 
+                        : 'bg-gray-300 scale-0'
+                    }`}></div>
+                  </div>
+                  
+                  {/* Content */}
+                  <div className="text-center">
+                    {/* Highlight badge */}
+                    <div className="inline-flex items-center bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-700 px-3 py-1 rounded-full text-sm font-medium mb-4">
+                      {process.highlight}
+                    </div>
+                    
+                    {/* Number */}
+                    <div className="bg-gradient-to-r from-orange-400 to-orange-500 text-white text-sm font-bold w-8 h-8 rounded-full flex items-center justify-center mx-auto mb-4">
+                      {String(index + 1).padStart(2, '0')}
+                    </div>
+                    
+                    {/* Title */}
+                    <h3 className="text-xl font-bold mb-4 text-gray-900">
+                      {process.title}
+                    </h3>
+                    
+                    {/* Description */}
+                    <p className="text-gray-600 leading-relaxed">
+                      {process.description}
+                    </p>
+                  </div>
                 </div>
               );
             })}
           </div>
         </div>
 
-        {/* Navigation */}
-        <div className="flex items-center justify-center gap-6 mt-16">
-          <button
-            onClick={() => setActiveStep((prev) => (prev - 1 + processes.length) % processes.length)}
-            className="p-4 rounded-full bg-white border-2 border-gray-200 text-gray-700 hover:text-blue-600 hover:border-blue-300 hover:shadow-lg transition-all duration-300"
-          >
-            <ChevronLeft className="h-5 w-5" />
-          </button>
-          
-          <div className="flex gap-3">
-            {processes.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setActiveStep(index)}
-                className={`h-3 rounded-full transition-all duration-300 ${
-                  activeStep === index 
-                    ? 'bg-gradient-to-r from-blue-500 to-cyan-500 w-8' 
-                    : 'bg-gray-300 hover:bg-gray-400 w-3'
-                }`}
-              />
-            ))}
-          </div>
-          
-          <button
-            onClick={() => setActiveStep((prev) => (prev + 1) % processes.length)}
-            className="p-4 rounded-full bg-white border-2 border-gray-200 text-gray-700 hover:text-blue-600 hover:border-blue-300 hover:shadow-lg transition-all duration-300"
-          >
-            <ChevronRight className="h-5 w-5" />
-          </button>
-        </div>
-
         {/* Bottom CTA */}
-        <div className="text-center mt-16">
-          <div className="inline-flex items-center gap-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white px-8 py-4 rounded-2xl font-semibold hover:shadow-lg hover:shadow-orange-500/30 transition-all duration-300 cursor-pointer">
+        <div className="text-center mt-20">
+          <div className="inline-flex items-center gap-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white px-8 py-4 rounded-2xl font-semibold hover:shadow-lg hover:shadow-orange-500/30 transition-all duration-300 cursor-pointer hover:-translate-y-1">
             Начать обучение сегодня
             <div className="bg-white/20 rounded-full p-1">
-              <ChevronRight className="h-4 w-4" />
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
             </div>
           </div>
         </div>
