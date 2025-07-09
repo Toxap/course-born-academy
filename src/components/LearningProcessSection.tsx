@@ -132,22 +132,26 @@ const LearningProcessSection = () => {
           </p>
         </div>
 
-        {/* Progress bar */}
-        <div className="max-w-4xl mx-auto mb-16">
-          <div className="relative h-2 bg-white/10 rounded-full overflow-hidden">
-            <div 
-              className="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full transition-all duration-300"
-              style={{ width: `${(scrollProgress * 100)}%` }}
-            />
-          </div>
-          <div className="flex justify-between mt-4 text-sm text-gray-400">
-            <span>Новичок</span>
-            <span>Профессионал</span>
-          </div>
-        </div>
 
-        {/* Evolution phases */}
-        <div className="max-w-6xl mx-auto">
+        {/* Evolution phases with vertical progress line */}
+        <div className="max-w-6xl mx-auto relative">
+          {/* Vertical progress line */}
+          <div className="absolute left-1/2 top-0 bottom-0 hidden lg:flex flex-col items-center transform -translate-x-1/2 z-10">
+            <div className="relative w-1 bg-white/10 rounded-full flex-1">
+              <div 
+                className="w-full bg-gradient-to-b from-indigo-500 via-purple-500 to-pink-500 rounded-full transition-all duration-300"
+                style={{ height: `${(scrollProgress * 100)}%` }}
+              />
+            </div>
+            {/* Progress labels */}
+            <div className="absolute -top-8 left-8 text-sm text-gray-400 whitespace-nowrap">
+              Новичок
+            </div>
+            <div className="absolute -bottom-8 left-8 text-sm text-gray-400 whitespace-nowrap">
+              Профессионал
+            </div>
+          </div>
+          
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {phases.map((phase, index) => {
               const IconComponent = phase.icon;
