@@ -25,7 +25,7 @@ const CoursesSection = () => {
       employment: "87%",
       color: "from-blue-500 to-blue-700",
       icon: Code,
-      image: "👨‍💻"
+      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=300&fit=crop"
     },
     {
       id: 2,
@@ -45,7 +45,7 @@ const CoursesSection = () => {
       employment: "82%",
       color: "from-cyan-500 to-cyan-700",
       icon: Globe,
-      image: "🎨"
+      image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=400&h=300&fit=crop"
     },
     {
       id: 3,
@@ -65,7 +65,7 @@ const CoursesSection = () => {
       employment: "91%",
       color: "from-green-500 to-green-700",
       icon: Server,
-      image: "⚙️"
+      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=300&fit=crop"
     },
     {
       id: 4,
@@ -85,7 +85,7 @@ const CoursesSection = () => {
       employment: "78%",
       color: "from-purple-500 to-purple-700",
       icon: Database,
-      image: "📊"
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop"
     }
   ];
 
@@ -183,13 +183,16 @@ const CoursesSection = () => {
             </button>
 
             {/* Course content */}
-            <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl border border-gray-700/50 shadow-2xl overflow-hidden">
+            <div 
+              key={currentCourse}
+              className="bg-gray-800/50 backdrop-blur-sm rounded-2xl border border-gray-700/50 shadow-2xl overflow-hidden transition-all duration-500 ease-in-out transform"
+            >
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
                 {/* Left side - Course info */}
-                <div className="p-8 lg:p-12">
+                <div className="p-8 lg:p-12 transition-all duration-500">
                   <div className="space-y-6">
                     <div className="flex items-center space-x-4">
-                      <div className={`p-3 rounded-xl bg-gradient-to-r ${course.color} shadow-lg`}>
+                      <div className={`p-3 rounded-xl bg-gradient-to-r ${course.color} shadow-lg transition-all duration-300`}>
                         <course.icon className="w-8 h-8 text-white" />
                       </div>
                       <div>
@@ -242,11 +245,15 @@ const CoursesSection = () => {
                 </div>
 
                 {/* Right side - Visual */}
-                <div className="relative p-8 lg:p-12 flex items-center justify-center">
+                <div className="relative p-8 lg:p-12 flex items-center justify-center transition-all duration-500">
                   <div className="relative">
                     {/* Main illustration */}
-                    <div className="text-8xl mb-6 text-center animate-float">
-                      {course.image}
+                    <div className="mb-6 text-center">
+                      <img 
+                        src={course.image} 
+                        alt={course.title}
+                        className="w-80 h-60 object-cover rounded-xl shadow-2xl animate-float border-2 border-rose-400/20"
+                      />
                     </div>
 
                     {/* Stats */}
