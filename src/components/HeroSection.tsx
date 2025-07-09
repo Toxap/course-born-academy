@@ -19,7 +19,7 @@ const HeroSection = () => {
       <div className="absolute top-0 left-0 w-full h-full bg-navy/60 z-10"></div>
 
       {/* Hero Content */}
-      <div className="relative z-20 text-left px-4 max-w-4xl mx-auto">
+      <div className="relative z-20 text-left px-4 max-w-4xl ml-8">
         <h1 className="text-6xl md:text-8xl text-white leading-tight lg:text-8xl font-bold text-left">
           <span>Course</span>
           <span className="block">Born</span>
