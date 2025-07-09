@@ -137,7 +137,8 @@ export default {
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'marquee': 'marquee 40s linear infinite',
 				'float': 'float 3s ease-in-out infinite',
-				'float-delayed': 'float-delayed 3s ease-in-out infinite 1.5s'
+				'float-delayed': 'float-delayed 3s ease-in-out infinite 1.5s',
+				'spin-slow': 'spin 8s linear infinite'
 			}
 		}
 	},

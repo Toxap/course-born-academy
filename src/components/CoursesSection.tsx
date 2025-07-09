@@ -100,21 +100,38 @@ const CoursesSection = () => {
   const course = courses[currentCourse];
 
   return (
-    <section className="relative py-20 bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800 overflow-hidden">
-      {/* Background decorations */}
+    <section id="courses" className="relative py-20 overflow-hidden">
+      {/* Complex layered background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-gray-950 to-slate-900"></div>
+      
+      {/* Animated geometric pattern */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-10 left-10 w-20 h-20 bg-rose-400/10 rounded-full blur-xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-32 h-32 bg-rose-500/10 rounded-full blur-xl animate-pulse"></div>
-        <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-rose-300/5 rounded-full blur-lg animate-bounce"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(244,63,94,0.1),transparent_50%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(244,63,94,0.08),transparent_50%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_90%_10%,rgba(244,63,94,0.05),transparent_50%)]"></div>
         
-        {/* Floating elements */}
-        <div className="absolute top-16 right-1/4 text-rose-400/20 animate-float">
-          <div className="text-2xl font-mono transform rotate-12">{'</>'}</div>
-        </div>
-        <div className="absolute bottom-32 left-1/3 text-rose-300/20 animate-float-delayed">
-          <div className="text-3xl font-mono transform -rotate-12">{'{ }'}</div>
-        </div>
+        {/* Animated grid pattern */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(244,63,94,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(244,63,94,0.03)_1px,transparent_1px)] bg-[size:64px_64px] animate-pulse"></div>
+        
+        {/* Floating geometric shapes */}
+        <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-rose-500/10 to-rose-600/5 rounded-full blur-xl animate-float"></div>
+        <div className="absolute bottom-32 right-20 w-24 h-24 bg-gradient-to-tl from-rose-400/15 to-rose-500/8 rounded-full blur-lg animate-float-delayed"></div>
+        <div className="absolute top-1/2 left-1/3 w-20 h-20 bg-gradient-to-r from-rose-300/8 to-rose-400/5 rounded-full blur-md animate-bounce"></div>
+        
+        {/* Hexagonal patterns */}
+        <div className="absolute top-10 right-1/4 w-16 h-16 bg-rose-500/5 transform rotate-45 animate-spin-slow"></div>
+        <div className="absolute bottom-20 left-1/4 w-12 h-12 bg-rose-400/8 transform rotate-12 animate-float"></div>
+        <div className="absolute top-1/3 right-10 w-8 h-8 bg-rose-300/10 transform -rotate-45 animate-pulse"></div>
+        
+        {/* Code-like floating elements */}
+        <div className="absolute top-16 right-1/4 text-rose-400/15 animate-float text-4xl font-mono transform rotate-12">{'</>'}</div>
+        <div className="absolute bottom-32 left-1/3 text-rose-300/12 animate-float-delayed text-5xl font-mono transform -rotate-12">{'{ }'}</div>
+        <div className="absolute top-1/2 right-1/3 text-rose-500/10 animate-bounce text-3xl font-mono">{'{...}'}</div>
+        <div className="absolute bottom-1/4 left-1/5 text-rose-400/8 animate-float text-2xl font-mono transform rotate-45">{'[]'}</div>
       </div>
+      
+      {/* Overlay for depth */}
+      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/50 via-transparent to-slate-950/30"></div>
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
