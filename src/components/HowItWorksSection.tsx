@@ -74,50 +74,36 @@ const HowItWorksSection = () => {
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-            {/* Animated connection line */}
-            <div className="hidden md:block absolute top-20 left-1/6 right-1/6 h-0.5 bg-gradient-accent overflow-hidden">
-              <div 
-                className="h-full bg-gradient-accent transition-all duration-1000 ease-out"
-                style={{
-                  width: `${lineProgress * 100}%`,
-                  transform: 'translateX(0)'
-                }}
-              />
-            </div>
-            
+        <div className="max-w-4xl mx-auto relative">
+          {/* Vertical animated line */}
+          <div className="absolute left-1/2 top-0 w-0.5 bg-muted/30 h-full transform -translate-x-1/2">
+            <div 
+              className="w-full bg-gradient-accent transition-all duration-1000 ease-out"
+              style={{
+                height: `${lineProgress * 100}%`
+              }}
+            />
+          </div>
+          
+          <div className="space-y-16">
             {steps.map((step, index) => {
               const IconComponent = step.icon;
               const isVisible = visibleSteps.includes(index);
+              const isLeft = index % 2 === 0;
               
               return (
                 <div 
                   key={index} 
-                  className={`text-center relative transition-all duration-700 ease-out ${
+                  className={`flex items-center gap-8 ${
+                    isLeft ? 'flex-row' : 'flex-row-reverse'
+                  } transition-all duration-700 ease-out ${
                     isVisible 
-                      ? 'opacity-100 translate-y-0' 
-                      : 'opacity-0 translate-y-8'
+                      ? 'opacity-100 translate-x-0' 
+                      : `opacity-0 ${isLeft ? '-translate-x-8' : 'translate-x-8'}`
                   }`}
                 >
-                  {/* Step number */}
-                  <div className={`bg-gradient-accent text-white rounded-full w-12 h-12 mx-auto mb-6 flex items-center justify-center text-lg font-bold transition-all duration-500 ${
-                    isVisible ? 'scale-100' : 'scale-0'
-                  }`}>
-                    {step.number}
-                  </div>
-                  
-                  {/* Icon */}
-                  <div className={`bg-card p-4 rounded-full w-16 h-16 mx-auto mb-6 flex items-center justify-center shadow-soft transition-all duration-500 delay-200 ${
-                    isVisible ? 'scale-100 rotate-0' : 'scale-0 rotate-12'
-                  }`}>
-                    <IconComponent className="h-8 w-8 text-accent" />
-                  </div>
-                  
                   {/* Content */}
-                  <div className={`transition-all duration-500 delay-300 ${
-                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                  }`}>
+                  <div className={`flex-1 ${isLeft ? 'text-right pr-8' : 'text-left pl-8'}`}>
                     <h3 className="text-xl font-semibold text-primary mb-3">
                       {step.title}
                     </h3>
@@ -125,6 +111,26 @@ const HowItWorksSection = () => {
                       {step.description}
                     </p>
                   </div>
+                  
+                  {/* Central icon area */}
+                  <div className="flex flex-col items-center relative z-10">
+                    {/* Step number */}
+                    <div className={`bg-gradient-accent text-white rounded-full w-12 h-12 flex items-center justify-center text-lg font-bold mb-4 transition-all duration-500 ${
+                      isVisible ? 'scale-100' : 'scale-0'
+                    }`}>
+                      {step.number}
+                    </div>
+                    
+                    {/* Icon */}
+                    <div className={`bg-card p-4 rounded-full w-16 h-16 flex items-center justify-center shadow-soft transition-all duration-500 delay-200 ${
+                      isVisible ? 'scale-100 rotate-0' : 'scale-0 rotate-12'
+                    }`}>
+                      <IconComponent className="h-8 w-8 text-accent" />
+                    </div>
+                  </div>
+                  
+                  {/* Empty space for alignment */}
+                  <div className="flex-1"></div>
                 </div>
               );
             })}
