@@ -61,7 +61,41 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				/* Custom colors using design system */
+				navy: {
+					DEFAULT: 'hsl(var(--navy))',
+					light: 'hsl(var(--navy-light))'
+				},
+				blue: {
+					accent: 'hsl(var(--blue-accent))'
+				},
+				purple: {
+					accent: 'hsl(var(--purple-accent))'
+				},
+				gray: {
+					50: 'hsl(var(--gray-50))',
+					100: 'hsl(var(--gray-100))',
+					500: 'hsl(var(--gray-500))',
+					900: 'hsl(var(--gray-900))'
 				}
+			},
+			backgroundImage: {
+				'gradient-hero': 'var(--gradient-hero)',
+				'gradient-accent': 'var(--gradient-accent)',
+				'gradient-subtle': 'var(--gradient-subtle)'
+			},
+			boxShadow: {
+				'soft': 'var(--shadow-soft)',
+				'medium': 'var(--shadow-medium)',
+				'large': 'var(--shadow-large)'
+			},
+			transitionTimingFunction: {
+				'smooth': 'cubic-bezier(0.4, 0, 0.2, 1)',
+				'bounce': 'cubic-bezier(0.68, -0.55, 0.265, 1.55)'
+			},
+			fontFamily: {
+				'sans': ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
