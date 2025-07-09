@@ -166,13 +166,13 @@ const LearningProcessSection = () => {
                   style={{ transitionDelay: `${index * 150}ms` }}
                 >
                   {/* Shape container */}
-                  <div className="flex flex-col items-center mb-6">
+                  <div className="flex flex-col items-center mb-6 relative">
                     <div className={getShapeClasses(process.shape, isVisible)}>
                       <IconComponent className="h-8 w-8 text-white" />
                     </div>
                     
-                    {/* Connection dot */}
-                    <div className={`w-4 h-4 rounded-full mt-4 transition-all duration-500 ${
+                    {/* Connection dot positioned at line level */}
+                    <div className={`absolute top-8 left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full transition-all duration-500 ${
                       isVisible 
                         ? 'bg-gradient-to-r from-blue-500 to-cyan-500 scale-100' 
                         : 'bg-gray-300 scale-0'
