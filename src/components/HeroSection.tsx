@@ -20,8 +20,9 @@ const HeroSection = () => {
 
       {/* Hero Content */}
       <div className="relative z-20 text-left px-4 max-w-4xl mx-auto">
-        <h1 className="text-6xl md:text-8xl text-white leading-tight px-0 mx-px lg:text-8xl font-bold py-0 my-0 text-left">
-          CourseBorn
+        <h1 className="text-6xl md:text-8xl text-white leading-tight lg:text-8xl font-bold text-left">
+          <span>Course</span>
+          <span className="block">Born</span>
         </h1>
       </div>
 
