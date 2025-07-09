@@ -179,8 +179,13 @@ const LearningProcessSection = () => {
                       : 'bg-white/5 backdrop-blur-sm border-white/10 hover:bg-white/10'
                   }`}>
                     {/* Phase indicator */}
-                    <div className="absolute -top-4 -left-4 w-12 h-12 rounded-full bg-gradient-to-br from-white to-gray-200 flex items-center justify-center font-black text-gray-800 shadow-lg">
-                      {index + 1}
+                    <div className="absolute -top-6 -left-6 w-16 h-16 rounded-full bg-gradient-to-br from-indigo-400 via-purple-500 to-pink-500 p-0.5 shadow-2xl shadow-indigo-500/50 animate-pulse">
+                      <div className="w-full h-full rounded-full bg-gradient-to-br from-white to-indigo-50 flex items-center justify-center relative overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/20 to-transparent rotate-45 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                        <span className="text-xl font-black bg-gradient-to-br from-indigo-600 to-purple-700 bg-clip-text text-transparent relative z-10">
+                          {index + 1}
+                        </span>
+                      </div>
                     </div>
                     
                     {/* Icon */}
