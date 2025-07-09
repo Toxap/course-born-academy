@@ -9,7 +9,7 @@ const HeroSection = () => {
       });
     }
   };
-  return <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+  return <section id="hero" className="relative min-h-screen flex items-center justify-start overflow-hidden">
       {/* Background Video */}
       <video autoPlay muted loop playsInline className="absolute top-0 left-0 w-full h-full object-cover z-0">
         <source src="http://cdn.bornsite.ru/static/backAInew.mp4" type="video/mp4" />
@@ -19,7 +19,7 @@ const HeroSection = () => {
       <div className="absolute top-0 left-0 w-full h-full bg-navy/60 z-10"></div>
 
       {/* Hero Content */}
-      <div className="relative z-20 text-left max-w-4xl px-0 py-0 mx-0 my-0">
+      <div className="relative z-20 text-left px-8 py-0">
         <h1 className="text-6xl md:text-8xl text-white leading-tight lg:text-8xl font-bold text-left">
           <span>Course</span>
           <span className="block">Born</span>
