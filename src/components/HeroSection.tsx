@@ -26,6 +26,16 @@ const HeroSection = () => {
         </h1>
       </div>
 
+      {/* Login Button */}
+      <div className="absolute top-8 right-8 z-20">
+        <Button 
+          variant="ghost" 
+          className="text-white/80 hover:text-white hover:bg-white/10 border border-white/20 hover:border-white/40 backdrop-blur-sm"
+        >
+          Войти
+        </Button>
+      </div>
+
       {/* Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
         <div className="animate-bounce">
