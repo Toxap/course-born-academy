@@ -118,39 +118,29 @@ const LearningProcessSection = () => {
 
         {/* Process timeline */}
         <div className="max-w-5xl mx-auto relative">
-          {/* Zigzag line SVG */}
-          <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 800 600" fill="none">
+          {/* Connecting line that flows through items */}
+          <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 1000 800" preserveAspectRatio="xMidYMid meet">
             <path
-              d="M100 50 L200 50 L250 100 L350 100 L400 150 L500 150 L550 200 L650 200 L700 250 L750 250"
-              stroke="url(#gradient1)"
-              strokeWidth="3"
-              strokeDasharray="8,4"
+              d="M 200 120 Q 300 120 350 180 T 500 180 Q 600 180 650 240 T 800 240 Q 850 240 850 300 L 850 350 Q 850 410 750 410 T 650 470 Q 550 470 500 530 T 350 530 Q 250 530 200 590"
+              stroke="url(#flowGradient)"
+              strokeWidth="4"
+              fill="none"
+              strokeDasharray="12,6"
               className="animate-pulse"
-            />
-            <path
-              d="M100 300 L150 300 L200 350 L300 350 L350 400 L450 400 L500 450 L600 450 L650 500 L700 500"
-              stroke="url(#gradient2)"
-              strokeWidth="3"
-              strokeDasharray="8,4"
-              className="animate-pulse"
-              style={{ animationDelay: "1s" }}
             />
             <defs>
-              <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+              <linearGradient id="flowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stopColor="#3b82f6" />
-                <stop offset="50%" stopColor="#06b6d4" />
-                <stop offset="100%" stopColor="#8b5cf6" />
-              </linearGradient>
-              <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#f59e0b" />
-                <stop offset="50%" stopColor="#ef4444" />
-                <stop offset="100%" stopColor="#8b5cf6" />
+                <stop offset="25%" stopColor="#06b6d4" />
+                <stop offset="50%" stopColor="#8b5cf6" />
+                <stop offset="75%" stopColor="#f59e0b" />
+                <stop offset="100%" stopColor="#ef4444" />
               </linearGradient>
             </defs>
           </svg>
 
           {/* Process items */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20 relative z-10">
             {processes.map((process, index) => {
               const IconComponent = process.icon;
               const isVisible = visibleBlocks.includes(index);
@@ -165,18 +155,32 @@ const LearningProcessSection = () => {
                   }`}
                   style={{ transitionDelay: `${index * 150}ms` }}
                 >
+                  {/* Connection line to next element */}
+                  {index < processes.length - 1 && (
+                    <div className="absolute top-8 left-full w-12 h-0.5 bg-gradient-to-r from-blue-500 to-transparent hidden lg:block z-20"></div>
+                  )}
+                  
                   {/* Shape container */}
                   <div className="flex flex-col items-center mb-6 relative">
                     <div className={getShapeClasses(process.shape, isVisible)}>
                       <IconComponent className="h-8 w-8 text-white" />
                     </div>
                     
-                    {/* Connection dot positioned at line level */}
-                    <div className={`absolute top-8 left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full transition-all duration-500 ${
+                    {/* Connection dot positioned at line intersection */}
+                    <div className={`absolute top-8 -right-6 w-3 h-3 rounded-full transition-all duration-500 z-30 ${
                       isVisible 
-                        ? 'bg-gradient-to-r from-blue-500 to-cyan-500 scale-100' 
+                        ? 'bg-gradient-to-r from-blue-500 to-cyan-500 scale-100 shadow-lg shadow-blue-500/50' 
                         : 'bg-gray-300 scale-0'
                     }`}></div>
+                    
+                    {/* Left connection dot for even indexes */}
+                    {index % 2 === 0 && (
+                      <div className={`absolute top-8 -left-6 w-3 h-3 rounded-full transition-all duration-500 z-30 ${
+                        isVisible 
+                          ? 'bg-gradient-to-r from-purple-500 to-pink-500 scale-100 shadow-lg shadow-purple-500/50' 
+                          : 'bg-gray-300 scale-0'
+                      }`}></div>
+                    )}
                   </div>
                   
                   {/* Content */}
