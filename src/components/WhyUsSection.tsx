@@ -86,19 +86,19 @@ const WhyUsSection = () => {
   };
 
   return (
-    <section className="relative py-20 bg-gradient-to-br from-background via-background to-primary/5 overflow-hidden">
+    <section className="relative py-20 bg-gradient-to-br from-gray-900 via-slate-900 to-gray-800 overflow-hidden">
       {/* Floating geometric decorations */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-20 left-10 text-primary/10 animate-pulse">
+        <div className="absolute top-20 left-10 text-white/5 animate-pulse">
           <GeometricShape type="hexagon" className="transform rotate-45" />
         </div>
-        <div className="absolute top-40 right-20 text-accent/10 animate-bounce">
+        <div className="absolute top-40 right-20 text-blue-400/10 animate-bounce">
           <GeometricShape type="triangle" className="transform -rotate-12" />
         </div>
-        <div className="absolute bottom-20 left-20 text-secondary/10 animate-pulse">
+        <div className="absolute bottom-20 left-20 text-purple-400/10 animate-pulse">
           <GeometricShape type="diamond" className="transform rotate-90" />
         </div>
-        <div className="absolute bottom-40 right-10 text-primary/10 animate-bounce">
+        <div className="absolute bottom-40 right-10 text-cyan-400/10 animate-bounce">
           <GeometricShape type="circle" className="transform scale-150" />
         </div>
       </div>
@@ -106,14 +106,14 @@ const WhyUsSection = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <div className="relative inline-block">
-            <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4 relative z-10">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 relative z-10">
               Почему выбирают нас
             </h2>
-            <div className="absolute -top-4 -right-4 text-accent/20">
+            <div className="absolute -top-4 -right-4 text-blue-400/20">
               <GeometricShape type="hexagon" className="transform rotate-12" />
             </div>
           </div>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
             Мы предлагаем качественное образование с фокусом на практических навыках
           </p>
         </div>
@@ -132,13 +132,13 @@ const WhyUsSection = () => {
               >
                 {/* Background geometric shape */}
                 <div className="absolute inset-0 -z-10 transform group-hover:scale-110 transition-transform duration-500">
-                  <div className={`absolute top-0 right-0 text-gradient-to-br ${advantage.color} opacity-5 transform rotate-45`}>
+                  <div className={`absolute top-0 right-0 text-gradient-to-br ${advantage.color} opacity-10 transform rotate-45`}>
                     <GeometricShape type={advantage.shape} className="w-32 h-32" />
                   </div>
                 </div>
                 
                 {/* Main card */}
-                <div className="relative p-8 bg-card/80 backdrop-blur-sm rounded-2xl border border-border/50 hover:border-accent/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-2 group-hover:bg-card/90">
+                <div className="relative p-8 bg-gray-800/80 backdrop-blur-sm rounded-2xl border border-gray-700/50 hover:border-blue-400/50 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/20 hover:-translate-y-2 group-hover:bg-gray-800/90">
                   {/* Icon container with geometric background */}
                   <div className="relative mb-6 mx-auto w-20 h-20 flex items-center justify-center">
                     <div className={`absolute inset-0 bg-gradient-to-br ${advantage.color} rounded-2xl transform rotate-45 group-hover:rotate-90 transition-transform duration-500`}></div>
@@ -148,10 +148,10 @@ const WhyUsSection = () => {
                   </div>
                   
                   {/* Content */}
-                  <h3 className="text-xl font-semibold text-primary mb-3 text-center">
+                  <h3 className="text-xl font-semibold text-white mb-3 text-center">
                     {advantage.title}
                   </h3>
-                  <p className="text-muted-foreground leading-relaxed text-center">
+                  <p className="text-gray-300 leading-relaxed text-center">
                     {advantage.description}
                   </p>
                   
