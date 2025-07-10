@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Code, Zap, Trophy, Users, Brain, Rocket } from "lucide-react";
+import { Code, Zap, Trophy, Users, Brain, Rocket, Shield, Sword, Crown } from "lucide-react";
 
 const LearningProcessSection = () => {
   const [activePhase, setActivePhase] = useState(0);
@@ -99,6 +99,20 @@ const LearningProcessSection = () => {
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_30%,rgba(99,102,241,0.1),transparent_50%)]"></div>
         <div className="absolute bottom-0 right-0 w-full h-full bg-[radial-gradient(circle_at_80%_70%,rgba(168,85,247,0.1),transparent_50%)]"></div>
         
+        {/* Medieval runes decoration */}
+        <div className="absolute top-10 left-10 text-indigo-300/20 text-6xl font-mono transform rotate-12">⚔</div>
+        <div className="absolute top-20 right-20 text-purple-300/20 text-4xl font-mono transform -rotate-12">🛡</div>
+        <div className="absolute bottom-20 left-20 text-cyan-300/20 text-5xl font-mono transform rotate-45">👑</div>
+        <div className="absolute bottom-10 right-10 text-pink-300/20 text-3xl font-mono transform -rotate-45">⚡</div>
+        
+        {/* Futuristic grid lines */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-cyan-400 to-transparent"></div>
+          <div className="absolute top-0 right-1/4 w-px h-full bg-gradient-to-b from-transparent via-purple-400 to-transparent"></div>
+          <div className="absolute left-0 top-1/3 w-full h-px bg-gradient-to-r from-transparent via-indigo-400 to-transparent"></div>
+          <div className="absolute left-0 bottom-1/3 w-full h-px bg-gradient-to-r from-transparent via-pink-400 to-transparent"></div>
+        </div>
+        
         {/* Floating particles */}
         <div className="absolute inset-0">
           {[...Array(20)].map((_, i) => (
@@ -114,6 +128,12 @@ const LearningProcessSection = () => {
             />
           ))}
         </div>
+        
+        {/* Holographic corners */}
+        <div className="absolute top-0 left-0 w-20 h-20 border-l-2 border-t-2 border-cyan-400/30"></div>
+        <div className="absolute top-0 right-0 w-20 h-20 border-r-2 border-t-2 border-purple-400/30"></div>
+        <div className="absolute bottom-0 left-0 w-20 h-20 border-l-2 border-b-2 border-pink-400/30"></div>
+        <div className="absolute bottom-0 right-0 w-20 h-20 border-r-2 border-b-2 border-indigo-400/30"></div>
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -178,11 +198,17 @@ const LearningProcessSection = () => {
                       ? `bg-gradient-to-br ${phase.color} shadow-2xl shadow-indigo-500/25 border-white/20` 
                       : 'bg-white/5 backdrop-blur-sm border-white/10 hover:bg-white/10'
                   }`}>
-                    {/* Phase indicator */}
+                     {/* Phase indicator with medieval-futuristic design */}
                     <div className="absolute -top-6 -left-6 w-16 h-16 rounded-full bg-gradient-to-br from-indigo-400 via-purple-500 to-pink-500 p-0.5 shadow-2xl shadow-indigo-500/50 animate-pulse">
-                      <div className="w-full h-full rounded-full bg-gradient-to-br from-white to-indigo-50 flex items-center justify-center relative overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/20 to-transparent rotate-45 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                        <span className="text-xl font-black bg-gradient-to-br from-indigo-600 to-purple-700 bg-clip-text text-transparent relative z-10">
+                      <div className="w-full h-full rounded-full bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center relative overflow-hidden border-2 border-cyan-400/30">
+                        {/* Holographic scan line */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/20 to-transparent rotate-45 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                        {/* Medieval rune corner accents */}
+                        <div className="absolute top-1 left-1 w-2 h-2 border-l border-t border-cyan-400/50"></div>
+                        <div className="absolute top-1 right-1 w-2 h-2 border-r border-t border-purple-400/50"></div>
+                        <div className="absolute bottom-1 left-1 w-2 h-2 border-l border-b border-pink-400/50"></div>
+                        <div className="absolute bottom-1 right-1 w-2 h-2 border-r border-b border-indigo-400/50"></div>
+                        <span className="text-xl font-black bg-gradient-to-br from-cyan-300 via-indigo-300 to-purple-300 bg-clip-text text-transparent relative z-10">
                           {index + 1}
                         </span>
                       </div>
