@@ -199,16 +199,16 @@ const LearningProcessSection = () => {
                       : 'bg-white/5 backdrop-blur-sm border-white/10 hover:bg-white/10'
                   }`}>
                      {/* Phase indicator with medieval-futuristic design */}
-                    <div className="absolute -top-6 -left-6 w-16 h-16 rounded-full bg-gradient-to-br from-indigo-400 via-purple-500 to-pink-500 p-0.5 shadow-2xl shadow-indigo-500/50 animate-pulse">
+                    <div className="absolute -top-4 -left-4 w-12 h-12 rounded-full bg-gradient-to-br from-indigo-400 via-purple-500 to-pink-500 p-0.5 shadow-2xl shadow-indigo-500/50 animate-pulse">
                       <div className="w-full h-full rounded-full bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center relative overflow-hidden border-2 border-cyan-400/30">
                         {/* Holographic scan line */}
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/20 to-transparent rotate-45 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                         {/* Medieval rune corner accents */}
-                        <div className="absolute top-1 left-1 w-2 h-2 border-l border-t border-cyan-400/50"></div>
-                        <div className="absolute top-1 right-1 w-2 h-2 border-r border-t border-purple-400/50"></div>
-                        <div className="absolute bottom-1 left-1 w-2 h-2 border-l border-b border-pink-400/50"></div>
-                        <div className="absolute bottom-1 right-1 w-2 h-2 border-r border-b border-indigo-400/50"></div>
-                        <span className="text-xl font-black bg-gradient-to-br from-cyan-300 via-indigo-300 to-purple-300 bg-clip-text text-transparent relative z-10">
+                        <div className="absolute top-0.5 left-0.5 w-1.5 h-1.5 border-l border-t border-cyan-400/50"></div>
+                        <div className="absolute top-0.5 right-0.5 w-1.5 h-1.5 border-r border-t border-purple-400/50"></div>
+                        <div className="absolute bottom-0.5 left-0.5 w-1.5 h-1.5 border-l border-b border-pink-400/50"></div>
+                        <div className="absolute bottom-0.5 right-0.5 w-1.5 h-1.5 border-r border-b border-indigo-400/50"></div>
+                        <span className="text-lg font-black bg-gradient-to-br from-cyan-300 via-indigo-300 to-purple-300 bg-clip-text text-transparent relative z-10">
                           {index + 1}
                         </span>
                       </div>
