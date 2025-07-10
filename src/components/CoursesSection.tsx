@@ -26,12 +26,12 @@ const CoursesSection = () => {
       level: "Адепт",
       students: "2,500+ учеников",
       employment: "87% призваны",
-      color: "from-blue-500 to-blue-700",
-      glowColor: "shadow-blue-500/50",
+      color: "bg-red-900",
+      glowColor: "shadow-red-900/30",
       icon: Code,
       runeIcon: Shield,
-      scrollColor: "bg-gradient-to-br from-blue-900/80 to-indigo-900/80",
-      sealColor: "border-blue-400",
+      scrollColor: "bg-red-950/80",
+      sealColor: "border-red-800",
       magicType: "Стальная Магия"
     },
     {
@@ -52,12 +52,12 @@ const CoursesSection = () => {
       level: "Адепт",
       students: "1,800+ учеников", 
       employment: "82% призваны",
-      color: "from-cyan-500 to-cyan-700",
-      glowColor: "shadow-cyan-500/50",
+      color: "bg-red-800",
+      glowColor: "shadow-red-800/30",
       icon: Globe,
       runeIcon: Gem,
-      scrollColor: "bg-gradient-to-br from-cyan-900/80 to-teal-900/80",
-      sealColor: "border-cyan-400",
+      scrollColor: "bg-red-950/80",
+      sealColor: "border-red-700",
       magicType: "Кристальная Магия"
     },
     {
@@ -78,12 +78,12 @@ const CoursesSection = () => {
       level: "Мастер",
       students: "1,200+ учеников",
       employment: "91% призваны",
-      color: "from-green-500 to-green-700", 
-      glowColor: "shadow-green-500/50",
+      color: "bg-red-700", 
+      glowColor: "shadow-red-700/30",
       icon: Server,
       runeIcon: Crown,
-      scrollColor: "bg-gradient-to-br from-green-900/80 to-emerald-900/80",
-      sealColor: "border-green-400",
+      scrollColor: "bg-red-950/80",
+      sealColor: "border-red-600",
       magicType: "Теневая Магия"
     },
     {
@@ -104,12 +104,12 @@ const CoursesSection = () => {
       level: "Мастер", 
       students: "900+ учеников",
       employment: "78% призваны",
-      color: "from-purple-500 to-purple-700",
-      glowColor: "shadow-purple-500/50",
+      color: "bg-red-600",
+      glowColor: "shadow-red-600/30",
       icon: Database,
       runeIcon: Star,
-      scrollColor: "bg-gradient-to-br from-purple-900/80 to-violet-900/80",
-      sealColor: "border-purple-400",
+      scrollColor: "bg-red-950/80",
+      sealColor: "border-red-500",
       magicType: "Магия Оракула"
     }
   ];
@@ -142,39 +142,39 @@ const CoursesSection = () => {
   return (
     <section id="courses" className="relative py-20 overflow-hidden">
       {/* Medieval mystical background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-purple-950 to-slate-900"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-red-950 to-slate-900"></div>
       
       {/* Floating magical elements */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(139,92,246,0.15),transparent_60%)]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(168,85,247,0.1),transparent_50%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(127,29,29,0.15),transparent_60%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(153,27,27,0.1),transparent_50%)]"></div>
         
         {/* Ancient runes floating */}
-        <div className={`absolute top-20 left-10 text-amber-400/30 transform transition-all duration-2000 ${runesGlowing ? 'scale-100 rotate-0' : 'scale-0 rotate-45'}`}>
+        <div className={`absolute top-20 left-10 text-red-900/30 transform transition-all duration-2000 ${runesGlowing ? 'scale-100 rotate-0' : 'scale-0 rotate-45'}`}>
           <BookOpen className="w-20 h-20 animate-pulse" />
         </div>
-        <div className={`absolute top-40 right-20 text-purple-300/30 transform transition-all duration-2000 delay-300 ${runesGlowing ? 'scale-100 rotate-0' : 'scale-0 -rotate-12'}`}>
+        <div className={`absolute top-40 right-20 text-red-800/30 transform transition-all duration-2000 delay-300 ${runesGlowing ? 'scale-100 rotate-0' : 'scale-0 -rotate-12'}`}>
           <Scroll className="w-16 h-16 animate-bounce" />
         </div>
-        <div className={`absolute bottom-20 left-20 text-cyan-400/30 transform transition-all duration-2000 delay-500 ${runesGlowing ? 'scale-100 rotate-0' : 'scale-0 rotate-90'}`}>
+        <div className={`absolute bottom-20 left-20 text-red-700/30 transform transition-all duration-2000 delay-500 ${runesGlowing ? 'scale-100 rotate-0' : 'scale-0 rotate-90'}`}>
           <Wand2 className="w-24 h-24 animate-pulse" />
         </div>
-        <div className={`absolute bottom-40 right-10 text-pink-300/30 transform transition-all duration-2000 delay-700 ${runesGlowing ? 'scale-100 rotate-0' : 'scale-0 -rotate-45'}`}>
+        <div className={`absolute bottom-40 right-10 text-red-900/30 transform transition-all duration-2000 delay-700 ${runesGlowing ? 'scale-100 rotate-0' : 'scale-0 -rotate-45'}`}>
           <Gem className="w-18 h-18 animate-bounce" />
         </div>
 
         {/* Mystical grid patterns */}
         <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-0 left-1/3 w-px h-full bg-gradient-to-b from-transparent via-amber-400 to-transparent animate-pulse"></div>
-          <div className="absolute top-0 right-1/3 w-px h-full bg-gradient-to-b from-transparent via-purple-400 to-transparent animate-pulse"></div>
-          <div className="absolute left-0 top-1/4 w-full h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-pulse"></div>
+          <div className="absolute top-0 left-1/3 w-px h-full bg-gradient-to-b from-transparent via-red-800 to-transparent animate-pulse"></div>
+          <div className="absolute top-0 right-1/3 w-px h-full bg-gradient-to-b from-transparent via-red-700 to-transparent animate-pulse"></div>
+          <div className="absolute left-0 top-1/4 w-full h-px bg-gradient-to-r from-transparent via-red-800 to-transparent animate-pulse"></div>
         </div>
 
         {/* Floating magical particles */}
         {[...Array(25)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-1 h-1 bg-amber-400/20 rounded-full animate-pulse"
+            className="absolute w-1 h-1 bg-red-800/20 rounded-full animate-pulse"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -189,21 +189,21 @@ const CoursesSection = () => {
         {/* Magical header */}
         <div className="text-center mb-16">
           <div className="relative inline-block">
-            <h2 className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-purple-300 to-cyan-300 mb-4">
+            <h2 className="text-5xl md:text-6xl font-bold text-gray-200 mb-4">
               Древние Кодексы
             </h2>
             <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
-              <Crown className="w-12 h-12 text-amber-400 animate-pulse" />
+              <Crown className="w-12 h-12 text-red-800 animate-pulse" />
             </div>
             {/* Floating mystical symbols */}
             <div className="absolute -top-4 -left-12">
-              <Star className="w-6 h-6 text-purple-400 animate-spin" />
+              <Star className="w-6 h-6 text-red-700 animate-spin" />
             </div>
             <div className="absolute -top-4 -right-12">
-              <Star className="w-6 h-6 text-cyan-400 animate-spin" />
+              <Star className="w-6 h-6 text-red-700 animate-spin" />
             </div>
           </div>
-          <h3 className="text-4xl md:text-5xl font-bold text-gray-300 mb-6">
+          <h3 className="text-4xl md:text-5xl font-bold text-red-400 mb-6">
             Магических Знаний
           </h3>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
@@ -222,7 +222,7 @@ const CoursesSection = () => {
                   onClick={() => setCurrentCourse(index)}
                   className={`relative p-3 rounded-full transition-all duration-500 transform ${
                     index === currentCourse
-                      ? `bg-gradient-to-br ${courseItem.color} scale-125 ${courseItem.glowColor} shadow-2xl`
+                      ? `${courseItem.color} scale-125 ${courseItem.glowColor} shadow-2xl`
                       : 'bg-slate-800/50 hover:bg-slate-700/50 scale-100'
                   }`}
                 >
@@ -242,18 +242,18 @@ const CoursesSection = () => {
             {/* Navigation spell arrows */}
             <button
               onClick={prevCourse}
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-14 h-14 bg-gradient-to-br from-slate-800/90 to-slate-900/90 backdrop-blur-sm rounded-full border-2 border-amber-400/30 flex items-center justify-center text-amber-400 hover:border-amber-400/60 transition-all duration-300 hover:scale-110 shadow-lg"
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-14 h-14 bg-slate-800/90 backdrop-blur-sm rounded-full border-2 border-red-800/50 flex items-center justify-center text-red-400 hover:border-red-700/70 transition-all duration-300 hover:scale-110 shadow-lg"
             >
               <ChevronLeft className="w-8 h-8" />
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-amber-400/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute inset-0 rounded-full bg-red-800/10 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
             </button>
             
             <button
               onClick={nextCourse}
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-14 h-14 bg-gradient-to-br from-slate-800/90 to-slate-900/90 backdrop-blur-sm rounded-full border-2 border-amber-400/30 flex items-center justify-center text-amber-400 hover:border-amber-400/60 transition-all duration-300 hover:scale-110 shadow-lg"
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-14 h-14 bg-slate-800/90 backdrop-blur-sm rounded-full border-2 border-red-800/50 flex items-center justify-center text-red-400 hover:border-red-700/70 transition-all duration-300 hover:scale-110 shadow-lg"
             >
               <ChevronRight className="w-8 h-8" />
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-amber-400/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute inset-0 rounded-full bg-red-800/10 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
             </button>
 
             {/* Ancient tome */}
@@ -262,10 +262,10 @@ const CoursesSection = () => {
               className={`relative ${course.scrollColor} backdrop-blur-sm rounded-3xl border-4 ${course.sealColor} shadow-2xl ${course.glowColor} overflow-hidden transition-all duration-1000 ease-in-out transform ${bookOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-90'}`}
             >
               {/* Magical border decorations */}
-              <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-amber-400/50 rounded-tl-lg"></div>
-              <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 border-purple-400/50 rounded-tr-lg"></div>
-              <div className="absolute bottom-4 left-4 w-8 h-8 border-l-2 border-b-2 border-cyan-400/50 rounded-bl-lg"></div>
-              <div className="absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-pink-400/50 rounded-br-lg"></div>
+              <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-red-800/50 rounded-tl-lg"></div>
+              <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 border-red-700/50 rounded-tr-lg"></div>
+              <div className="absolute bottom-4 left-4 w-8 h-8 border-l-2 border-b-2 border-red-600/50 rounded-bl-lg"></div>
+              <div className="absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-red-500/50 rounded-br-lg"></div>
 
               {/* Mystical glow overlay */}
               <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-purple/5 pointer-events-none"></div>
@@ -278,16 +278,16 @@ const CoursesSection = () => {
                   
                   <div className="space-y-6 relative z-10">
                     <div className="flex items-center space-x-4">
-                      <div className={`relative p-4 rounded-2xl bg-gradient-to-br ${course.color} shadow-xl`}>
+                      <div className={`relative p-4 rounded-2xl ${course.color} shadow-xl`}>
                         <course.icon className="w-10 h-10 text-white" />
                         {/* Magical glow around icon */}
-                        <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-white/20 to-transparent animate-pulse"></div>
+                        <div className="absolute inset-0 rounded-2xl bg-white/10 animate-pulse"></div>
                       </div>
                       <div>
-                        <p className="text-sm text-amber-400 font-bold uppercase tracking-widest">
+                        <p className="text-sm text-red-400 font-bold uppercase tracking-widest">
                           {course.subtitle}
                         </p>
-                        <h3 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-purple-300">
+                        <h3 className="text-3xl font-bold text-gray-200">
                           {course.runicTitle}
                         </h3>
                         <p className="text-sm text-gray-400 italic">
@@ -297,26 +297,26 @@ const CoursesSection = () => {
                     </div>
 
                     {/* Magic type banner */}
-                    <div className={`inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-gradient-to-r ${course.color} bg-opacity-20 border border-amber-400/30`}>
-                      <Zap className="w-4 h-4 text-amber-400" />
-                      <span className="text-amber-300 font-semibold text-sm">{course.magicType}</span>
+                    <div className={`inline-flex items-center space-x-2 px-4 py-2 rounded-full ${course.color}/20 border border-red-800/50`}>
+                      <Zap className="w-4 h-4 text-red-400" />
+                      <span className="text-red-300 font-semibold text-sm">{course.magicType}</span>
                     </div>
 
-                    <div className="bg-slate-800/30 rounded-xl p-4 border border-amber-400/20">
+                    <div className="bg-slate-800/30 rounded-xl p-4 border border-red-800/30">
                       <p className="text-gray-300 text-lg leading-relaxed italic">
                         "{course.description}"
                       </p>
                     </div>
 
                     <div className="space-y-4">
-                      <h4 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-purple-300 flex items-center space-x-2">
-                        <BookOpen className="w-5 h-5 text-amber-400" />
+                      <h4 className="text-xl font-bold text-gray-200 flex items-center space-x-2">
+                        <BookOpen className="w-5 h-5 text-red-400" />
                         <span>Заклинания кодекса:</span>
                       </h4>
                       <ul className="space-y-3">
                         {course.features.map((feature, index) => (
                           <li key={index} className="flex items-center space-x-3">
-                            <div className="w-3 h-3 bg-gradient-to-r from-amber-400 to-purple-400 rounded-full animate-pulse"></div>
+                            <div className="w-3 h-3 bg-red-600 rounded-full animate-pulse"></div>
                             <span className="text-gray-300">{feature}</span>
                           </li>
                         ))}
@@ -326,21 +326,21 @@ const CoursesSection = () => {
                     <div className="grid grid-cols-2 gap-4">
                       <div className={`bg-slate-800/50 rounded-xl p-4 border ${course.sealColor}/30`}>
                         <div className="flex items-center space-x-2 mb-2">
-                          <Clock className="w-5 h-5 text-amber-400" />
+                          <Clock className="w-5 h-5 text-red-400" />
                           <span className="text-sm text-gray-400">Обучение</span>
                         </div>
                         <p className="text-white font-bold">{course.duration}</p>
                       </div>
                       <div className={`bg-slate-800/50 rounded-xl p-4 border ${course.sealColor}/30`}>
                         <div className="flex items-center space-x-2 mb-2">
-                          <Award className="w-5 h-5 text-purple-400" />
+                          <Award className="w-5 h-5 text-red-400" />
                           <span className="text-sm text-gray-400">Уровень</span>
                         </div>
                         <p className="text-white font-bold">{course.level}</p>
                       </div>
                     </div>
 
-                    <Button className={`w-full bg-gradient-to-r ${course.color} hover:shadow-2xl ${course.glowColor} text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 border border-amber-400/20`}>
+                    <Button className={`w-full ${course.color} hover:shadow-2xl ${course.glowColor} text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 border border-red-800/30`}>
                       <Wand2 className="w-5 h-5 mr-2" />
                       Начать Обучение
                     </Button>
@@ -351,13 +351,13 @@ const CoursesSection = () => {
                 <div className="relative p-8 lg:p-12 flex items-center justify-center">
                   <div className="relative">
                     {/* Central magical crystal */}
-                    <div className={`relative w-80 h-80 bg-gradient-to-br ${course.color} rounded-full p-8 shadow-2xl ${course.glowColor} border-4 ${course.sealColor}`}>
+                    <div className={`relative w-80 h-80 ${course.color} rounded-full p-8 shadow-2xl ${course.glowColor} border-4 ${course.sealColor}`}>
                       {/* Inner magical circle */}
-                      <div className="w-full h-full bg-gradient-to-br from-white/10 to-transparent rounded-full flex items-center justify-center relative overflow-hidden">
+                      <div className="w-full h-full bg-white/10 rounded-full flex items-center justify-center relative overflow-hidden">
                         {/* Rotating magical rings */}
-                        <div className="absolute inset-0 border-2 border-amber-400/20 rounded-full animate-spin"></div>
-                        <div className="absolute inset-4 border border-purple-400/20 rounded-full animate-spin reverse"></div>
-                        <div className="absolute inset-8 border border-cyan-400/20 rounded-full animate-spin"></div>
+                        <div className="absolute inset-0 border-2 border-red-800/30 rounded-full animate-spin"></div>
+                        <div className="absolute inset-4 border border-red-700/30 rounded-full animate-spin reverse"></div>
+                        <div className="absolute inset-8 border border-red-600/30 rounded-full animate-spin"></div>
                         
                         {/* Central icon */}
                         <div className="relative z-10 p-8 bg-white/10 rounded-full backdrop-blur-sm">
@@ -369,7 +369,7 @@ const CoursesSection = () => {
                           {[...Array(12)].map((_, i) => (
                             <div
                               key={i}
-                              className="absolute w-2 h-2 bg-amber-400 rounded-full animate-pulse"
+                              className="absolute w-2 h-2 bg-red-500 rounded-full animate-pulse"
                               style={{
                                 left: `${20 + Math.cos(i * 30 * Math.PI / 180) * 30}%`,
                                 top: `${20 + Math.sin(i * 30 * Math.PI / 180) * 30}%`,
@@ -385,7 +385,7 @@ const CoursesSection = () => {
                     <div className="absolute -top-6 -left-6">
                       <div className={`bg-slate-800/90 backdrop-blur-sm rounded-xl p-4 border-2 ${course.sealColor} shadow-xl`}>
                         <div className="flex items-center space-x-2 mb-2">
-                          <Users className="w-5 h-5 text-amber-400" />
+                          <Users className="w-5 h-5 text-red-400" />
                           <span className="text-sm text-gray-400">Ученики</span>
                         </div>
                         <p className="text-white font-bold">{course.students}</p>
@@ -395,7 +395,7 @@ const CoursesSection = () => {
                     <div className="absolute -bottom-6 -right-6">
                       <div className={`bg-slate-800/90 backdrop-blur-sm rounded-xl p-4 border-2 ${course.sealColor} shadow-xl`}>
                         <div className="flex items-center space-x-2 mb-2">
-                          <Target className="w-5 h-5 text-purple-400" />
+                          <Target className="w-5 h-5 text-red-400" />
                           <span className="text-sm text-gray-400">Призваны</span>
                         </div>
                         <p className="text-white font-bold">{course.employment}</p>
@@ -404,13 +404,13 @@ const CoursesSection = () => {
 
                     {/* Floating mystical symbols */}
                     <div className="absolute -top-12 right-8">
-                      <Star className="w-8 h-8 text-amber-400/60 animate-spin" />
+                      <Star className="w-8 h-8 text-red-700/60 animate-spin" />
                     </div>
                     <div className="absolute -bottom-12 left-8">
-                      <Gem className="w-6 h-6 text-purple-400/60 animate-bounce" />
+                      <Gem className="w-6 h-6 text-red-600/60 animate-bounce" />
                     </div>
                     <div className="absolute top-1/2 -right-12">
-                      <Wand2 className="w-10 h-10 text-cyan-400/60 animate-pulse" />
+                      <Wand2 className="w-10 h-10 text-red-500/60 animate-pulse" />
                     </div>
                   </div>
                 </div>
