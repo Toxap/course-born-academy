@@ -108,7 +108,7 @@ const CoursesSection = () => {
                     onClick={() => setCurrentCourse(index)}
                     className={`p-3 rounded-lg border-2 transition-all duration-300 hover:scale-110 hover:shadow-lg ${
                       index === currentCourse
-                        ? 'bg-red-900 border-red-700 text-white animate-pulse'
+                        ? 'bg-red-900 border-red-700 text-white'
                         : 'bg-slate-800 border-slate-700 text-gray-400 hover:border-slate-600 hover:bg-slate-700'
                     }`}
                   >
@@ -135,20 +135,35 @@ const CoursesSection = () => {
               <ChevronRight className="w-6 h-6" />
             </button>
 
-            <div 
-              key={currentCourse}
-              className="bg-slate-800 rounded-2xl border-2 border-red-900/50 overflow-hidden shadow-xl animate-fade-in"
-            >
+            <div className="bg-slate-800 rounded-2xl border-2 border-red-900/50 overflow-hidden shadow-xl transition-all duration-500 ease-in-out">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8">
-                <div className="space-y-6 animate-fade-in">
+                <div className="space-y-6 transition-all duration-500 ease-in-out transform">
                   <div className="flex items-center space-x-4">
                     <div className="p-3 bg-red-900 rounded-lg hover:bg-red-800 transition-all duration-300 hover:scale-110">
                       <course.icon className="w-8 h-8 text-white" />
                     </div>
-                    <div>
-                      <h3 className="text-2xl font-bold text-gray-200">
+                    <div className="flex-1">
+                      <h3 className="text-2xl font-bold text-gray-200 mb-2">
                         {course.title}
                       </h3>
+                      <div className="flex items-center space-x-4 text-sm text-gray-400">
+                        <div className="flex items-center space-x-1">
+                          <Clock className="w-4 h-4 text-red-400" />
+                          <span>{course.duration}</span>
+                        </div>
+                        <div className="flex items-center space-x-1">
+                          <Award className="w-4 h-4 text-red-400" />
+                          <span>{course.level}</span>
+                        </div>
+                        <div className="flex items-center space-x-1">
+                          <Users className="w-4 h-4 text-red-400" />
+                          <span>{course.students}</span>
+                        </div>
+                        <div className="flex items-center space-x-1">
+                          <Target className="w-4 h-4 text-red-400" />
+                          <span>{course.employment}</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
 
@@ -166,50 +181,22 @@ const CoursesSection = () => {
                     <ul className="space-y-2">
                       {course.features.map((feature, index) => (
                         <li key={index} className="flex items-center space-x-3 animate-fade-in hover:translate-x-2 transition-transform duration-200" style={{animationDelay: `${index * 100}ms`}}>
-                          <div className="w-2 h-2 bg-red-600 rounded-full animate-pulse"></div>
+                          <div className="w-2 h-2 bg-red-600 rounded-full"></div>
                           <span className="text-gray-300">{feature}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  <Button className="w-full bg-red-900 hover:bg-red-800 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg animate-fade-in">
+                  <Button className="w-full bg-red-900 hover:bg-red-800 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg">
                     Начать обучение
                   </Button>
                 </div>
 
-                <div className="bg-slate-700/30 rounded-lg p-6 animate-fade-in">
-                  <div className="grid grid-cols-2 gap-4 mb-6">
-                    <div className="bg-slate-800/50 rounded-lg p-4 hover:bg-slate-800/70 transition-all duration-300 hover:scale-105">
-                      <div className="flex items-center space-x-2 mb-2">
-                        <Clock className="w-4 h-4 text-red-400 animate-pulse" />
-                        <span className="text-sm text-gray-400">Длительность</span>
-                      </div>
-                      <p className="text-white font-semibold">{course.duration}</p>
-                    </div>
-                    <div className="bg-slate-800/50 rounded-lg p-4 hover:bg-slate-800/70 transition-all duration-300 hover:scale-105">
-                      <div className="flex items-center space-x-2 mb-2">
-                        <Award className="w-4 h-4 text-red-400 animate-pulse" />
-                        <span className="text-sm text-gray-400">Уровень</span>
-                      </div>
-                      <p className="text-white font-semibold">{course.level}</p>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="text-center p-3 bg-slate-800/50 rounded-lg hover:bg-slate-800/70 transition-all duration-300 hover:scale-105">
-                      <div className="flex items-center justify-center space-x-2 mb-1">
-                        <Users className="w-4 h-4 text-red-400 animate-pulse" />
-                        <span className="text-sm text-gray-400">Студентов</span>
-                      </div>
-                      <p className="text-white font-semibold">{course.students}</p>
-                    </div>
-                    <div className="text-center p-3 bg-slate-800/50 rounded-lg hover:bg-slate-800/70 transition-all duration-300 hover:scale-105">
-                      <div className="flex items-center justify-center space-x-2 mb-1">
-                        <Target className="w-4 h-4 text-red-400 animate-pulse" />
-                        <span className="text-sm text-gray-400">Трудоустройство</span>
-                      </div>
-                      <p className="text-white font-semibold">{course.employment}</p>
+                <div className="bg-slate-700/30 rounded-lg p-6 flex items-center justify-center">
+                  <div className="text-center text-gray-400">
+                    <div className="w-32 h-32 bg-slate-600 rounded-lg mb-4 flex items-center justify-center">
+                      <span className="text-sm">Изображение курса</span>
                     </div>
                   </div>
                 </div>
