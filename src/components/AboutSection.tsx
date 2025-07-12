@@ -131,36 +131,6 @@ const AboutSection = () => {
               {/* Video overlay for better text readability */}
               <div className="absolute inset-0 bg-slate-900/40"></div>
               
-              {/* Optional content overlay on video */}
-              <div className="absolute inset-0 flex items-center justify-center p-8">
-                <div className="text-center text-white space-y-4 opacity-80">
-                  <div className="relative">
-                    <div className="text-6xl font-mono text-red-400 animate-pulse">{'<AI/>'}</div>
-                    <div className="absolute -top-2 -right-2">
-                      <Star className="w-6 h-6 text-red-400 animate-spin" />
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <div className="text-gray-200 font-mono text-lg">
-                      {'> Future.learn()'}
-                    </div>
-                    <div className="text-green-400 font-mono text-sm">
-                      {'✓ AI-powered education'}
-                    </div>
-                    <div className="text-red-400 font-mono text-sm">
-                      {'🚀 Innovation ahead'}
-                    </div>
-                  </div>
-
-                  {/* Tech symbols floating animation */}
-                  <div className="flex justify-center space-x-6 text-2xl">
-                    <Shield className="w-8 h-8 text-red-400 animate-bounce" />
-                    <Zap className="w-8 h-8 text-white animate-pulse" />
-                    <Crown className="w-8 h-8 text-red-400 animate-bounce delay-300" />
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
