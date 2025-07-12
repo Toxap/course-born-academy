@@ -112,7 +112,7 @@ const AboutSection = () => {
             {/* Video container with diagonal mask */}
             <div className="relative h-full min-h-[600px] overflow-hidden"
                  style={{
-                   clipPath: 'polygon(5% 0, 100% 0, 100% 100%, 0% 100%)'
+                   clipPath: 'polygon(0% 0, 100% 0, 100% 100%, 0% 100%)'
                  }}>
               
               {/* Background video */}
