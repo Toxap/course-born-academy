@@ -168,56 +168,62 @@ const TestimonialsSection = () => {
               <div className="absolute bottom-0 left-0 w-48 h-48 bg-red-600 rounded-full animate-pulse delay-700"></div>
             </div>
 
-            {/* Featured testimonial content */}
-            <div className="relative z-10 text-center">
-              <div className="mb-8">
-                <Quote className="w-16 h-16 text-red-400 mx-auto mb-6 opacity-50 transition-all duration-500" />
-                <div className="overflow-hidden">
-                  <blockquote 
-                    key={currentTestimonial}
-                    className="text-2xl md:text-3xl text-gray-200 leading-relaxed italic font-light mb-8 animate-fade-in"
-                  >
-                    "{testimonials[currentTestimonial].text}"
-                  </blockquote>
-                </div>
-                
-                {/* Rating */}
-                <div className="flex items-center justify-center gap-1 mb-8">
-                  {[...Array(5)].map((_, i) => (
-                    <Star 
-                      key={`${currentTestimonial}-${i}`}
-                      className="h-6 w-6 fill-yellow-400 text-yellow-400 animate-fade-in"
-                      style={{ animationDelay: `${i * 100 + 200}ms` }}
-                    />
-                  ))}
-                </div>
-              </div>
-              
-              {/* Author info */}
+            {/* Testimonials slider container */}
+            <div className="relative overflow-hidden">
               <div 
-                key={`author-${currentTestimonial}`}
-                className="flex items-center justify-center gap-6 animate-fade-in"
-                style={{ animationDelay: "400ms" }}
+                className="flex transition-transform duration-700 ease-out"
+                style={{
+                  transform: `translateX(-${currentTestimonial * 100}%)`
+                }}
               >
-                <div className="relative">
-                  <div className="absolute inset-0 bg-red-600 rounded-full blur-md opacity-30 transition-all duration-500"></div>
-                  <img
-                    src={testimonials[currentTestimonial].photo}
-                    alt={testimonials[currentTestimonial].name}
-                    className="relative w-20 h-20 rounded-full object-cover border-4 border-red-600/50 transition-all duration-500"
-                  />
-                </div>
-                <div className="text-left">
-                  <h4 className="text-2xl font-bold text-gray-200 mb-1 transition-all duration-300">
-                    {testimonials[currentTestimonial].name}
-                  </h4>
-                  <p className="text-red-400 font-semibold mb-1 transition-all duration-300">
-                    {testimonials[currentTestimonial].role}
-                  </p>
-                  <p className="text-gray-400 text-sm transition-all duration-300">
-                    {testimonials[currentTestimonial].company} • {testimonials[currentTestimonial].salary}
-                  </p>
-                </div>
+                {testimonials.map((testimonial, index) => (
+                  <div key={index} className="w-full flex-shrink-0">
+                    {/* Featured testimonial content */}
+                    <div className="relative z-10 text-center">
+                      <div className="mb-8">
+                        <Quote className="w-16 h-16 text-red-400 mx-auto mb-6 opacity-50 transition-all duration-500" />
+                        <div className="overflow-hidden">
+                          <blockquote className="text-2xl md:text-3xl text-gray-200 leading-relaxed italic font-light mb-8">
+                            "{testimonial.text}"
+                          </blockquote>
+                        </div>
+                        
+                        {/* Rating */}
+                        <div className="flex items-center justify-center gap-1 mb-8">
+                          {[...Array(5)].map((_, i) => (
+                            <Star 
+                              key={`${index}-${i}`}
+                              className="h-6 w-6 fill-yellow-400 text-yellow-400"
+                            />
+                          ))}
+                        </div>
+                      </div>
+                      
+                      {/* Author info */}
+                      <div className="flex items-center justify-center gap-6">
+                        <div className="relative">
+                          <div className="absolute inset-0 bg-red-600 rounded-full blur-md opacity-30 transition-all duration-500"></div>
+                          <img
+                            src={testimonial.photo}
+                            alt={testimonial.name}
+                            className="relative w-20 h-20 rounded-full object-cover border-4 border-red-600/50 transition-all duration-500"
+                          />
+                        </div>
+                        <div className="text-left">
+                          <h4 className="text-2xl font-bold text-gray-200 mb-1 transition-all duration-300">
+                            {testimonial.name}
+                          </h4>
+                          <p className="text-red-400 font-semibold mb-1 transition-all duration-300">
+                            {testimonial.role}
+                          </p>
+                          <p className="text-gray-400 text-sm transition-all duration-300">
+                            {testimonial.company} • {testimonial.salary}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
 
