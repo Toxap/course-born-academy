@@ -102,31 +102,17 @@ const LearningProcessSection = () => {
         </div>
 
         <div className="max-w-6xl mx-auto relative">
-          {/* Animated progress line */}
+          {/* Animated progress line with moving arrow */}
           <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-slate-700 hidden lg:block transform -translate-x-1/2 rounded-full">
             <div 
-              className="w-full bg-gradient-to-b from-red-600 via-red-500 to-red-400 transition-all duration-500 rounded-full shadow-lg shadow-red-600/50"
+              className="w-full bg-gradient-to-b from-red-600 via-red-500 to-red-400 transition-all duration-500 rounded-full shadow-lg shadow-red-600/50 relative"
               style={{ height: `${(scrollProgress * 100)}%` }}
-            />
-            {/* Animated dots along the line */}
-            {phases.map((_, index) => {
-              const progress = (index + 1) / phases.length;
-              const isReached = scrollProgress >= progress;
-              return (
-                <div
-                  key={index}
-                  className={`absolute w-4 h-4 rounded-full transform -translate-x-1/2 transition-all duration-500 ${
-                    isReached 
-                      ? 'bg-red-600 shadow-lg shadow-red-600/50 scale-100' 
-                      : 'bg-slate-600 scale-75'
-                  }`}
-                  style={{ 
-                    top: `${progress * 100}%`,
-                    left: '50%'
-                  }}
-                />
-              );
-            })}
+            >
+              {/* Moving arrow at the end of progress line */}
+              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
+                <div className="w-0 h-0 border-l-4 border-r-4 border-t-8 border-transparent border-t-red-500 animate-bounce"></div>
+              </div>
+            </div>
           </div>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -167,12 +153,6 @@ const LearningProcessSection = () => {
                       }`}></div>
                     </div>
 
-                    {/* Phase number with pulsing animation */}
-                    <div className="absolute -top-4 -left-4 w-12 h-12 bg-red-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
-                      <span className={`transition-all duration-300 ${isActive ? 'animate-pulse' : ''}`}>
-                        {index + 1}
-                      </span>
-                    </div>
                     
                     {/* Scan line effect */}
                     <div className={`absolute inset-0 bg-gradient-to-r from-transparent via-red-400/10 to-transparent transform transition-transform duration-1000 ${
@@ -250,25 +230,6 @@ const LearningProcessSection = () => {
             })}
           </div>
 
-          {/* Progress indicators */}
-          <div className="text-center mt-12">
-            <div className="inline-flex items-center space-x-2 bg-slate-800 rounded-full px-6 py-3 border border-red-900/50">
-              <span className="text-gray-400 text-sm">Прогресс:</span>
-              <div className="flex space-x-1">
-                {phases.map((_, index) => (
-                  <div
-                    key={index}
-                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                      index <= activePhase ? 'bg-red-600' : 'bg-slate-600'
-                    }`}
-                  />
-                ))}
-              </div>
-              <span className="text-red-400 text-sm font-semibold">
-                {Math.round((activePhase + 1) / phases.length * 100)}%
-              </span>
-            </div>
-          </div>
         </div>
       </div>
     </section>
