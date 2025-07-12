@@ -6,13 +6,13 @@ const MarqueeSection = () => {
   ];
 
   return (
-    <section className="relative bg-gradient-to-r from-primary/10 to-accent/10 py-4 overflow-hidden border-y border-border/20">
+    <section className="relative bg-background py-6 overflow-hidden border-y border-border/10">
       <div className="flex animate-marquee whitespace-nowrap">
         {/* First set of languages */}
         {languages.map((language, index) => (
           <span
             key={`first-${index}`}
-            className="inline-block mx-8 text-lg font-medium text-foreground/80 hover:text-accent transition-colors"
+            className="inline-block mx-8 text-lg font-medium text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-110"
           >
             {language}
           </span>
@@ -22,7 +22,7 @@ const MarqueeSection = () => {
         {languages.map((language, index) => (
           <span
             key={`second-${index}`}
-            className="inline-block mx-8 text-lg font-medium text-foreground/80 hover:text-accent transition-colors"
+            className="inline-block mx-8 text-lg font-medium text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-110"
           >
             {language}
           </span>
