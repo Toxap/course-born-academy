@@ -31,15 +31,6 @@ const AboutSection = () => {
         </div>
       </div>
 
-      {/* Subtle background elements */}
-      <div className="absolute inset-0 pointer-events-none opacity-20">
-        <div className="absolute top-20 left-10 text-red-400/30">
-          <Shield className="w-12 h-12 transform rotate-12 animate-pulse" />
-        </div>
-        <div className="absolute bottom-20 left-20 text-red-400/30">
-          <Crown className="w-14 h-14 transform rotate-45 animate-pulse" />
-        </div>
-      </div>
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
@@ -168,19 +159,6 @@ const AboutSection = () => {
                     <Zap className="w-8 h-8 text-white animate-pulse" />
                     <Crown className="w-8 h-8 text-red-400 animate-bounce delay-300" />
                   </div>
-                </div>
-              </div>
-              
-              {/* Floating elements over video */}
-              <div className="absolute top-16 right-12 animate-float">
-                <div className="w-16 h-16 bg-red-900/80 backdrop-blur-sm rounded-lg border border-red-400/30 flex items-center justify-center">
-                  <Lock className="w-8 h-8 text-red-400" />
-                </div>
-              </div>
-
-              <div className="absolute bottom-16 left-12 animate-float-delayed">
-                <div className="w-12 h-12 bg-slate-800/80 backdrop-blur-sm rounded-full border border-red-400/30 flex items-center justify-center">
-                  <Key className="w-6 h-6 text-red-400" />
                 </div>
               </div>
             </div>
