@@ -3,7 +3,6 @@ import { useState, useEffect, useRef } from "react";
 
 const HowItWorksSection = () => {
   const [visibleSteps, setVisibleSteps] = useState<number[]>([]);
-  const [lineProgress, setLineProgress] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
 
   const steps = [
@@ -36,8 +35,6 @@ const HowItWorksSection = () => {
             const windowHeight = window.innerHeight;
             const progress = Math.max(0, Math.min(1, (windowHeight - rect.top) / windowHeight));
             
-            setLineProgress(progress);
-            
             // Показываем шаги постепенно
             const stepThresholds = [0.3, 0.6, 0.9];
             const newVisibleSteps: number[] = [];
@@ -63,87 +60,72 @@ const HowItWorksSection = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
-      {/* Background effects */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(120,119,198,0.1),transparent_70%)]"></div>
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl"></div>
-      
-      <div className="container mx-auto px-4 relative z-10">
+    <section ref={sectionRef} className="py-20 bg-slate-900">
+      <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-200 mb-4">
             Как это работает
           </h2>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+          <div className="w-24 h-1 bg-red-600 mx-auto mb-6 rounded-full"></div>
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             Простой и понятный процесс обучения от выбора курса до трудоустройства
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto relative">
-          {/* Vertical animated line with glow */}
-          <div className="absolute left-1/2 top-0 w-0.5 bg-gradient-to-b from-transparent via-slate-600 to-transparent h-full transform -translate-x-1/2">
-            <div 
-              className="w-full bg-gradient-to-b from-primary via-accent to-primary transition-all duration-1000 ease-out shadow-lg shadow-primary/50"
-              style={{
-                height: `${lineProgress * 100}%`
-              }}
-            />
-          </div>
-          
-          <div className="space-y-16">
+        <div className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {steps.map((step, index) => {
               const IconComponent = step.icon;
               const isVisible = visibleSteps.includes(index);
-              const isLeft = index % 2 === 0;
               
               return (
                 <div 
                   key={index} 
-                  className={`flex items-center gap-8 ${
-                    isLeft ? 'flex-row' : 'flex-row-reverse'
-                  } transition-all duration-700 ease-out ${
+                  className={`group transition-all duration-700 ease-out ${
                     isVisible 
-                      ? 'opacity-100 translate-x-0' 
-                      : `opacity-0 ${isLeft ? '-translate-x-8' : 'translate-x-8'}`
+                      ? 'opacity-100 translate-y-0' 
+                      : 'opacity-0 translate-y-8'
                   }`}
+                  style={{ transitionDelay: `${index * 200}ms` }}
                 >
-                  {/* Content */}
-                  <div className={`flex-1 ${isLeft ? 'text-right pr-8' : 'text-left pl-8'}`}>
-                    <div className={`p-6 rounded-2xl bg-gradient-to-br ${
-                      isLeft 
-                        ? 'from-slate-800/50 to-slate-700/30 border-l-2 border-primary/50' 
-                        : 'from-slate-800/50 to-slate-700/30 border-r-2 border-accent/50'
-                    } backdrop-blur-sm shadow-xl transition-all duration-500 ${
-                      isVisible ? 'shadow-primary/20' : ''
-                    }`}>
-                      <h3 className="text-xl font-semibold text-white mb-3 bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent">
+                  {/* Card */}
+                  <div className="relative bg-slate-800 rounded-3xl border-2 border-red-900/50 p-8 hover:border-red-600/70 transition-all duration-300 hover:shadow-lg hover:shadow-red-900/20 hover:-translate-y-2 text-center">
+                    
+                    {/* Step number */}
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold shadow-lg">
+                      {step.number}
+                    </div>
+                    
+                    {/* Icon */}
+                    <div className="relative mb-6 mx-auto w-20 h-20 flex items-center justify-center">
+                      <div className="absolute inset-0 bg-red-900 rounded-2xl group-hover:scale-110 transition-transform duration-300"></div>
+                      <div className="absolute inset-2 bg-red-600/20 rounded-xl group-hover:scale-105 transition-transform duration-300 delay-100"></div>
+                      <div className="relative z-10">
+                        <IconComponent className="h-8 w-8 text-white" />
+                      </div>
+                    </div>
+                    
+                    {/* Content */}
+                    <div className="space-y-4">
+                      <h3 className="text-xl font-bold text-gray-200">
                         {step.title}
                       </h3>
                       <p className="text-gray-300 leading-relaxed">
                         {step.description}
                       </p>
                     </div>
-                  </div>
-                  
-                  {/* Central icon area */}
-                  <div className="flex flex-col items-center relative z-10">
-                    {/* Step number */}
-                    <div className={`bg-gradient-to-br from-primary to-accent text-white rounded-full w-12 h-12 flex items-center justify-center text-lg font-bold mb-4 transition-all duration-500 shadow-lg ${
-                      isVisible ? 'scale-100 shadow-primary/50' : 'scale-0'
-                    }`}>
-                      {step.number}
-                    </div>
                     
-                    {/* Icon */}
-                    <div className={`bg-gradient-to-br from-slate-800 to-slate-700 p-4 rounded-full w-16 h-16 flex items-center justify-center shadow-xl border border-slate-600 transition-all duration-500 delay-200 ${
-                      isVisible ? 'scale-100 rotate-0 shadow-primary/30' : 'scale-0 rotate-12'
-                    }`}>
-                      <IconComponent className="h-8 w-8 text-primary" />
-                    </div>
+                    {/* Bottom accent line */}
+                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-red-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center rounded-b-3xl"></div>
                   </div>
                   
-                  {/* Empty space for alignment */}
-                  <div className="flex-1"></div>
+                  {/* Connecting arrow (except for last item) */}
+                  {index < steps.length - 1 && (
+                    <div className="hidden md:block absolute top-1/2 -right-4 transform -translate-y-1/2 z-10">
+                      <div className="w-8 h-0.5 bg-red-600/50"></div>
+                      <div className="absolute -right-1 -top-1 w-0 h-0 border-l-2 border-t-2 border-b-2 border-transparent border-l-red-600/50 transform rotate-45"></div>
+                    </div>
+                  )}
                 </div>
               );
             })}
