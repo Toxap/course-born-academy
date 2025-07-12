@@ -21,20 +21,23 @@ const AboutSection = () => {
   }, []);
 
   return (
-    <section id="about" className="py-20 bg-slate-900">
+    <section id="about" className="py-20 bg-slate-900 relative overflow-hidden">
+      {/* Diagonal split overlay */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-slate-900 transform origin-top-left" 
+             style={{
+               clipPath: 'polygon(0 0, 65% 0, 55% 100%, 0 100%)'
+             }}>
+        </div>
+      </div>
+
       {/* Subtle background elements */}
       <div className="absolute inset-0 pointer-events-none opacity-20">
         <div className="absolute top-20 left-10 text-red-400/30">
           <Shield className="w-12 h-12 transform rotate-12 animate-pulse" />
         </div>
-        <div className="absolute top-40 right-20 text-red-400/30">
-          <Sword className="w-10 h-10 transform -rotate-12 animate-pulse" />
-        </div>
         <div className="absolute bottom-20 left-20 text-red-400/30">
           <Crown className="w-14 h-14 transform rotate-45 animate-pulse" />
-        </div>
-        <div className="absolute bottom-40 right-10 text-red-400/30">
-          <Star className="w-10 h-10 transform -rotate-45 animate-pulse" />
         </div>
       </div>
 
@@ -48,9 +51,9 @@ const AboutSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative">
           {/* Left side - Company info */}
-          <div className="space-y-8">
+          <div className="space-y-8 relative z-20">
             <div className={`transform transition-all duration-1000 ${bricksAnimated ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
               <div className="bg-slate-800 rounded-2xl border-2 border-red-900/50 p-8 shadow-xl">
                 <div className="flex items-center space-x-4 mb-6">
@@ -113,107 +116,72 @@ const AboutSection = () => {
             </div>
           </div>
 
-          {/* Right side - Interactive portal */}
-          <div className="relative">
-            <div className="relative w-full h-96 flex items-center justify-center">
+          {/* Right side - Video background */}
+          <div className="relative lg:absolute lg:right-0 lg:top-0 lg:bottom-0 lg:w-1/2 h-full">
+            {/* Video container with diagonal mask */}
+            <div className="relative h-full min-h-[600px] overflow-hidden"
+                 style={{
+                   clipPath: 'polygon(10% 0, 100% 0, 100% 100%, 0% 100%)'
+                 }}>
               
-              {/* Main portal container */}
-              <div className="relative">
-                {/* Portal frame */}
-                <div className="relative w-80 h-80 bg-slate-800 rounded-full border-4 border-red-900/50 shadow-2xl">
-                  
-                  {/* Portal doors */}
-                  <div className="absolute inset-4 rounded-full overflow-hidden">
-                    <div className={`flex h-full transition-all duration-2000 ease-in-out ${gateOpen ? 'transform' : ''}`}>
-                      {/* Left door */}
-                      <div className={`w-1/2 h-full bg-slate-700 border-r-2 border-red-900/30 transition-transform duration-2000 ${gateOpen ? 'transform -translate-x-full' : ''}`}>
-                        <div className="p-4 space-y-2">
-                          <div className="w-8 h-8 bg-red-400/20 rounded-full mx-auto mt-8"></div>
-                          <div className="w-6 h-1 bg-red-400/30 mx-auto"></div>
-                        </div>
-                      </div>
-                      
-                      {/* Right door */}
-                      <div className={`w-1/2 h-full bg-slate-700 border-l-2 border-red-900/30 transition-transform duration-2000 ${gateOpen ? 'transform translate-x-full' : ''}`}>
-                        <div className="p-4 space-y-2">
-                          <div className="w-8 h-8 bg-red-400/20 rounded-full mx-auto mt-8"></div>
-                          <div className="w-6 h-1 bg-red-400/30 mx-auto"></div>
-                        </div>
-                      </div>
+              {/* Background video */}
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{ minHeight: '600px' }}
+              >
+                <source src="/videos/background-ai.mp4" type="video/mp4" />
+                Ваш браузер не поддерживает видео.
+              </video>
+              
+              {/* Video overlay for better text readability */}
+              <div className="absolute inset-0 bg-slate-900/40"></div>
+              
+              {/* Optional content overlay on video */}
+              <div className="absolute inset-0 flex items-center justify-center p-8">
+                <div className="text-center text-white space-y-4 opacity-80">
+                  <div className="relative">
+                    <div className="text-6xl font-mono text-red-400 animate-pulse">{'<AI/>'}</div>
+                    <div className="absolute -top-2 -right-2">
+                      <Star className="w-6 h-6 text-red-400 animate-spin" />
                     </div>
-                    
-                    {/* Portal content (revealed when gates open) */}
-                    <div className={`absolute inset-0 bg-slate-700/30 transition-all duration-1000 ${gateOpen ? 'opacity-100' : 'opacity-0'}`}>
-                      <div className="h-full flex flex-col items-center justify-center text-center space-y-4 p-6">
-                        {/* Code symbols */}
-                        <div className="relative">
-                          <div className="text-4xl font-mono text-red-400 animate-pulse">{'<Code/>'}</div>
-                          <div className="absolute -top-2 -right-2">
-                            <Star className="w-4 h-4 text-red-400 animate-spin" />
-                          </div>
-                        </div>
-                        
-                        <div className="space-y-2">
-                          <div className="text-gray-300 font-mono text-sm">
-                            {'> learning.start()'}
-                          </div>
-                          <div className="text-green-400 font-mono text-xs">
-                            {'✓ Status: READY'}
-                          </div>
-                          <div className="text-red-400 font-mono text-xs">
-                            {'🚀 Portal opened'}
-                          </div>
-                        </div>
-
-                        {/* Tech icons */}
-                        <div className="flex space-x-4 text-2xl">
-                          <Shield className="w-6 h-6 text-red-400 animate-pulse" />
-                          <Sword className="w-6 h-6 text-gray-300 animate-pulse" />
-                          <Crown className="w-6 h-6 text-red-400 animate-pulse" />
-                        </div>
-                      </div>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <div className="text-gray-200 font-mono text-lg">
+                      {'> Future.learn()'}
+                    </div>
+                    <div className="text-green-400 font-mono text-sm">
+                      {'✓ AI-powered education'}
+                    </div>
+                    <div className="text-red-400 font-mono text-sm">
+                      {'🚀 Innovation ahead'}
                     </div>
                   </div>
 
-                  {/* Portal top decoration */}
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <Crown className="w-8 h-8 text-red-400" />
-                  </div>
-                  
-                  {/* Side elements */}
-                  <div className="absolute top-8 -left-6">
-                    <div className="w-4 h-12 bg-red-600 rounded-sm"></div>
-                    <div className="w-6 h-4 bg-red-500 rounded-full mx-auto -mt-1 animate-pulse"></div>
-                  </div>
-                  <div className="absolute top-8 -right-6">
-                    <div className="w-4 h-12 bg-red-600 rounded-sm"></div>
-                    <div className="w-6 h-4 bg-red-500 rounded-full mx-auto -mt-1 animate-pulse"></div>
+                  {/* Tech symbols floating animation */}
+                  <div className="flex justify-center space-x-6 text-2xl">
+                    <Shield className="w-8 h-8 text-red-400 animate-bounce" />
+                    <Zap className="w-8 h-8 text-white animate-pulse" />
+                    <Crown className="w-8 h-8 text-red-400 animate-bounce delay-300" />
                   </div>
                 </div>
-
-                {/* Base */}
-                <div className="w-96 h-8 bg-slate-700 mx-auto rounded-sm border-2 border-red-900/30 shadow-lg"></div>
               </div>
-
-              {/* Floating elements */}
-              <div className="absolute top-0 left-0 transform -translate-x-8 -translate-y-8 animate-float">
-                <div className="w-12 h-12 bg-slate-800 backdrop-blur-sm rounded-lg border border-red-400/30 flex items-center justify-center">
-                  <Lock className="w-6 h-6 text-red-400" />
+              
+              {/* Floating elements over video */}
+              <div className="absolute top-16 right-12 animate-float">
+                <div className="w-16 h-16 bg-red-900/80 backdrop-blur-sm rounded-lg border border-red-400/30 flex items-center justify-center">
+                  <Lock className="w-8 h-8 text-red-400" />
                 </div>
               </div>
 
-              <div className="absolute bottom-0 right-0 transform translate-x-8 translate-y-8 animate-float-delayed">
-                <div className="w-10 h-10 bg-slate-800 backdrop-blur-sm rounded-full border border-red-400/30 flex items-center justify-center">
-                  <Key className="w-5 h-5 text-red-400" />
+              <div className="absolute bottom-16 left-12 animate-float-delayed">
+                <div className="w-12 h-12 bg-slate-800/80 backdrop-blur-sm rounded-full border border-red-400/30 flex items-center justify-center">
+                  <Key className="w-6 h-6 text-red-400" />
                 </div>
-              </div>
-
-              {/* Additional particles */}
-              <div className="absolute top-16 right-12 text-red-400/40 animate-pulse">
-                <Star className="w-6 h-6 transform rotate-12" />
-              </div>
-              <div className="absolute bottom-16 left-12 text-red-400/40 animate-pulse">
-                <Zap className="w-5 h-5 transform -rotate-12" />
               </div>
             </div>
           </div>
