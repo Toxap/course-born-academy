@@ -1,105 +1,129 @@
 import { Button } from "@/components/ui/button";
-import { Sparkles, Stars, Wand2 } from "lucide-react";
+import { Code, Rocket, Star, Zap } from "lucide-react";
 
 const FantasyMascotSection = () => {
   return (
-    <section className="relative py-20 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-cyan-400 via-blue-500 to-blue-600"></div>
-      
-      {/* Decorative elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* Floating magical elements */}
-        <div className="absolute top-10 left-10 text-white/20">
-          <Sparkles className="w-8 h-8 animate-pulse" />
+    <section className="py-20 bg-slate-900 relative overflow-hidden">
+      {/* Subtle background elements */}
+      <div className="absolute inset-0 pointer-events-none opacity-20">
+        <div className="absolute top-20 right-20 text-red-400/30">
+          <Star className="w-8 h-8 transform rotate-12 animate-pulse" />
         </div>
-        <div className="absolute top-20 right-20 text-white/15">
-          <Stars className="w-6 h-6 animate-bounce" />
+        <div className="absolute bottom-20 left-20 text-red-400/30">
+          <Zap className="w-10 h-10 transform -rotate-12 animate-pulse" />
         </div>
-        <div className="absolute bottom-32 left-20 text-white/10">
-          <Wand2 className="w-10 h-10 animate-float" />
-        </div>
-        
-        {/* Magical sparkles */}
-        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-white/30 rounded-full animate-ping"></div>
-        <div className="absolute top-3/4 right-1/3 w-3 h-3 bg-white/20 rounded-full animate-pulse"></div>
-        <div className="absolute bottom-1/4 left-1/3 w-1 h-1 bg-white/40 rounded-full animate-bounce"></div>
-        
-        {/* Abstract shapes */}
-        <div className="absolute top-16 right-1/4 w-20 h-20 bg-white/5 rounded-full blur-xl animate-float-delayed"></div>
-        <div className="absolute bottom-20 left-1/5 w-32 h-32 bg-white/3 rounded-full blur-2xl animate-float"></div>
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left side - Text content */}
-          <div className="space-y-6">
-            <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">
-              Думаешь, что магия IT
-              <br />
-              <span className="text-yellow-300">недоступна новичкам?</span>
-            </h2>
-            
-            <p className="text-xl text-blue-100 leading-relaxed">
-              Наш мудрый маскот развеет все мифы! Даже без предыдущего опыта можно 
-              освоить волшебство программирования. Присоединяйся к нашей гильдии 
-              разработчиков и открой портал в мир IT-технологий.
-            </p>
+          <div className="space-y-8">
+            <div className="space-y-6">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-200 leading-tight">
+                Думаешь, что магия IT
+                <br />
+                <span className="text-red-400">недоступна новичкам?</span>
+              </h2>
+              
+              <div className="w-24 h-1 bg-red-600 rounded-full"></div>
+              
+              <p className="text-xl text-gray-300 leading-relaxed">
+                Даже без предыдущего опыта можно освоить программирование. 
+                Присоединяйся к нашему сообществу разработчиков и открой 
+                мир IT-технологий.
+              </p>
+            </div>
             
             <div className="flex flex-col sm:flex-row gap-4">
               <Button 
                 size="lg" 
-                className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg"
+                className="bg-red-900 hover:bg-red-800 text-white font-semibold py-4 px-8 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg"
               >
-                Развеять миф
+                Начать обучение
               </Button>
               <Button 
                 variant="outline" 
                 size="lg"
-                className="border-2 border-white text-white hover:bg-white hover:text-blue-600 font-semibold py-4 px-8 rounded-full transition-all duration-300"
+                className="border-2 border-red-600 text-red-400 hover:bg-red-900/20 hover:text-red-300 font-semibold py-4 px-8 rounded-lg transition-all duration-300"
               >
                 Узнать больше
               </Button>
             </div>
           </div>
 
-          {/* Right side - Fantasy Mascot */}
-          <div className="relative flex justify-center lg:justify-end">
-            <div className="relative">
-              {/* Main mascot container */}
-              <div className="relative bg-white/10 backdrop-blur-sm rounded-full p-8 border border-white/20 shadow-2xl">
-                {/* Fantasy wizard mascot */}
-                <div className="text-8xl animate-float text-center">
-                  🧙‍♂️
+          {/* Right side - Code/Tech illustration */}
+          <div className="relative">
+            <div className="bg-slate-800 rounded-3xl border-2 border-red-900/50 p-8 shadow-xl">
+              <div className="space-y-6">
+                {/* Code window header */}
+                <div className="flex items-center space-x-2 pb-4 border-b border-slate-700">
+                  <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                  <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                  <span className="text-gray-400 text-sm ml-2">new_developer.js</span>
                 </div>
                 
-                {/* Magic effects around mascot */}
-                <div className="absolute -top-4 -right-4 text-yellow-300 animate-spin-slow">
-                  <Sparkles className="w-8 h-8" />
+                {/* Code content */}
+                <div className="space-y-3 font-mono text-sm">
+                  <div className="text-gray-400">
+                    <span className="text-purple-400">const</span>{" "}
+                    <span className="text-blue-400">newbie</span>{" "}
+                    <span className="text-gray-400">=</span>{" "}
+                    <span className="text-green-400">"absolute beginner"</span>
+                    <span className="text-gray-400">;</span>
+                  </div>
+                  
+                  <div className="text-gray-400">
+                    <span className="text-purple-400">const</span>{" "}
+                    <span className="text-blue-400">timeToLearn</span>{" "}
+                    <span className="text-gray-400">=</span>{" "}
+                    <span className="text-orange-400">3</span>{" "}
+                    <span className="text-gray-400">months;</span>
+                  </div>
+                  
+                  <div className="text-gray-400 mt-4">
+                    <span className="text-purple-400">if</span>{" "}
+                    <span className="text-gray-400">(</span>
+                    <span className="text-blue-400">motivation</span>{" "}
+                    <span className="text-gray-400">&&</span>{" "}
+                    <span className="text-blue-400">practice</span>
+                    <span className="text-gray-400">) {"{"}</span>
+                  </div>
+                  
+                  <div className="text-gray-400 ml-4">
+                    <span className="text-blue-400">newbie</span>
+                    <span className="text-gray-400">.</span>
+                    <span className="text-yellow-400">transform</span>
+                    <span className="text-gray-400">(</span>
+                    <span className="text-green-400">"developer"</span>
+                    <span className="text-gray-400">);</span>
+                  </div>
+                  
+                  <div className="text-gray-400">
+                    <span className="text-gray-400">{"}"}</span>
+                  </div>
+                  
+                  <div className="text-green-400 mt-4">
+                    // ✨ Magic happens here!
+                  </div>
                 </div>
-                <div className="absolute -bottom-2 -left-2 text-purple-300 animate-pulse">
-                  <Stars className="w-6 h-6" />
-                </div>
-                <div className="absolute top-1/2 -right-8 text-cyan-300 animate-bounce">
-                  <Wand2 className="w-6 h-6" />
+                
+                {/* Floating icons */}
+                <div className="flex justify-center space-x-6 pt-4">
+                  <div className="p-3 bg-red-900/50 rounded-lg">
+                    <Code className="w-6 h-6 text-red-400" />
+                  </div>
+                  <div className="p-3 bg-red-900/50 rounded-lg">
+                    <Rocket className="w-6 h-6 text-red-400" />
+                  </div>
+                  <div className="p-3 bg-red-900/50 rounded-lg">
+                    <Star className="w-6 h-6 text-red-400" />
+                  </div>
                 </div>
               </div>
               
-              {/* Floating magical orbs */}
-              <div className="absolute -top-8 left-8 w-4 h-4 bg-yellow-300/60 rounded-full animate-float blur-sm"></div>
-              <div className="absolute -bottom-6 right-12 w-3 h-3 bg-purple-300/50 rounded-full animate-float-delayed blur-sm"></div>
-              <div className="absolute top-1/3 -left-6 w-5 h-5 bg-cyan-300/40 rounded-full animate-bounce blur-sm"></div>
-              
-              {/* Magic spell text floating around */}
-              <div className="absolute -top-12 right-4 text-white/30 text-sm font-mono animate-float transform rotate-12">
-                &lt;magic/&gt;
-              </div>
-              <div className="absolute -bottom-8 left-2 text-white/25 text-xs font-mono animate-float-delayed transform -rotate-12">
-                console.log('✨')
-              </div>
-              
-              {/* Magical aura */}
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 via-pink-400/20 to-yellow-400/20 rounded-full blur-xl animate-pulse"></div>
+              {/* Glow effect */}
+              <div className="absolute inset-0 rounded-3xl bg-red-600/5 pointer-events-none"></div>
             </div>
           </div>
         </div>
