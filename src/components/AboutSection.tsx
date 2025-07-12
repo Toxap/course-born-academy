@@ -26,7 +26,7 @@ const AboutSection = () => {
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-slate-900 transform origin-top-left" 
              style={{
-               clipPath: 'polygon(0 0, 65% 0, 55% 100%, 0 100%)'
+               clipPath: 'polygon(0 0, 75% 0, 45% 100%, 0 100%)'
              }}>
         </div>
       </div>
@@ -112,7 +112,7 @@ const AboutSection = () => {
             {/* Video container with diagonal mask */}
             <div className="relative h-full min-h-[600px] overflow-hidden"
                  style={{
-                   clipPath: 'polygon(10% 0, 100% 0, 100% 100%, 0% 100%)'
+                   clipPath: 'polygon(25% 0, 100% 0, 100% 100%, 0% 100%)'
                  }}>
               
               {/* Background video */}
