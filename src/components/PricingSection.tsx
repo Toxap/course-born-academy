@@ -129,7 +129,7 @@ const PricingSection = () => {
               }`}></div>
               
               {/* Main card */}
-              <Card className={`relative bg-slate-800 rounded-3xl border-2 transition-all duration-500 hover:shadow-2xl hover:shadow-red-900/20 hover:-translate-y-2 overflow-hidden ${
+              <Card className={`relative bg-slate-800 rounded-3xl border-2 transition-all duration-500 hover:shadow-2xl hover:shadow-red-900/20 hover:-translate-y-2 overflow-hidden h-full flex flex-col ${
                 plan.isPopular 
                   ? 'border-red-600/70 shadow-xl shadow-red-900/20 scale-105' 
                   : 'border-red-900/50 hover:border-red-600/70'
@@ -166,8 +166,8 @@ const PricingSection = () => {
                   </div>
                 </CardHeader>
 
-                <CardContent className="space-y-4 relative z-10">
-                  <ul className="space-y-3">
+                <CardContent className="space-y-4 relative z-10 flex-1 flex flex-col">
+                  <ul className="space-y-3 flex-1">
                     {plan.features.map((feature, featureIndex) => (
                       <li key={featureIndex} className="flex items-center gap-3 hover:translate-x-1 transition-transform duration-200">
                         <Check className="w-5 h-5 text-red-400 flex-shrink-0" />
