@@ -146,12 +146,12 @@ const PricingSection = () => {
                 </div>
 
                 {plan.isPopular && (
-                  <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg z-20">
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg z-20">
                     Популярный
                   </div>
                 )}
                 
-                <CardHeader className="text-center pb-4 relative z-10">
+                <CardHeader className={`text-center pb-4 relative z-10 ${plan.isPopular ? 'pt-8' : ''}`}>
                   <CardTitle className="text-2xl font-bold text-gray-200">
                     {plan.name}
                   </CardTitle>
