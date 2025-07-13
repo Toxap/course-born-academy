@@ -122,11 +122,6 @@ const WhyUsSection = () => {
                     }`}></div>
                   </div>
                   
-                  {/* Floating number indicator */}
-                  <div className="absolute -top-4 -right-4 w-12 h-12 bg-white border-4 border-red-600 rounded-full flex items-center justify-center text-red-600 text-xl font-black shadow-2xl shadow-red-600/50 z-20 ring-2 ring-white">
-                    {index + 1}
-                  </div>
-                  
                   {/* Icon container with advanced animations */}
                   <div className="relative mb-6 mx-auto w-20 h-20 flex items-center justify-center">
                     <div className={`absolute inset-0 bg-red-900 rounded-2xl transform transition-all duration-500 ${
