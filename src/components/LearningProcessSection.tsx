@@ -144,7 +144,7 @@ const LearningProcessSection = () => {
                   } ${isActive ? 'opacity-100' : 'opacity-30'}`} />
                   
                   {/* Phase card with advanced animations */}
-                  <div className={`group relative bg-slate-800 rounded-3xl border-2 border-red-900/50 p-8 transition-all duration-500 hover:border-red-600/70 hover:shadow-2xl hover:shadow-red-900/20 overflow-hidden ${
+                  <div className={`group relative bg-slate-800 rounded-3xl border-2 border-red-900/50 p-8 transition-all duration-500 hover:border-red-600/70 hover:shadow-2xl hover:shadow-red-900/20 overflow-hidden h-96 flex flex-col ${
                     hoveredPhase === index ? 'transform hover:-translate-y-4' : ''
                   }`}>
                     
@@ -165,7 +165,7 @@ const LearningProcessSection = () => {
                     } rounded-3xl`}></div>
                     
                     {/* Icon with morphing animation */}
-                    <div className="relative mb-6 mx-auto w-20 h-20 flex items-center justify-center">
+                    <div className="relative mb-6 mx-auto w-20 h-20 flex items-center justify-center flex-shrink-0">
                       <div className={`absolute inset-0 bg-red-900 rounded-2xl transition-all duration-500 ${
                         hoveredPhase === index ? 'rotate-12 scale-110' : 'rotate-0 scale-100'
                       }`}></div>
@@ -188,8 +188,8 @@ const LearningProcessSection = () => {
                     </div>
                     
                     {/* Content with staggered animations */}
-                    <div className="space-y-4 relative z-10">
-                      <div className="flex items-center justify-between">
+                    <div className="space-y-4 relative z-10 flex-grow flex flex-col">
+                      <div className="flex items-center justify-between flex-shrink-0">
                         <h3 className="text-2xl font-bold text-gray-200 group-hover:text-white transition-colors duration-300">
                           {phase.title}
                         </h3>
@@ -201,16 +201,16 @@ const LearningProcessSection = () => {
                         </div>
                       </div>
                       
-                      <span className="inline-block text-xs font-semibold text-red-400 bg-red-900/20 px-3 py-1 rounded-full">
+                      <span className="inline-block text-xs font-semibold text-red-400 bg-red-900/20 px-3 py-1 rounded-full flex-shrink-0 w-fit">
                         {phase.duration}
                       </span>
                       
-                      <p className="text-gray-300 leading-relaxed group-hover:text-gray-200 transition-colors duration-300">
+                      <p className="text-gray-300 leading-relaxed group-hover:text-gray-200 transition-colors duration-300 flex-grow">
                         {phase.description}
                       </p>
                       
                       {/* Skills tags with animation */}
-                      <div className="flex flex-wrap gap-2 mt-4">
+                      <div className="flex flex-wrap gap-2 mt-auto flex-shrink-0">
                         {phase.skills.map((skill, skillIndex) => (
                           <span
                             key={skill}
