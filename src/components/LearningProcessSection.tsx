@@ -118,7 +118,7 @@ const LearningProcessSection = () => {
             </div>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {phases.map((phase, index) => {
               const IconComponent = phase.icon;
               const isActive = index <= activePhase;
@@ -127,7 +127,7 @@ const LearningProcessSection = () => {
               return (
                 <div
                   key={phase.id}
-                  className={`relative transition-all duration-700 min-h-96 ${
+                  className={`relative transition-all duration-700 ${
                     isActive 
                       ? 'opacity-100 translate-y-0 scale-100' 
                       : 'opacity-30 translate-y-8 scale-95'
