@@ -1,6 +1,33 @@
 import { Button } from "@/components/ui/button";
 import { ArrowDown } from "lucide-react";
+import { useEffect, useRef } from "react";
 const HeroSection = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    let isReversing = false;
+    const originalPlaybackRate = 1;
+
+    const handleTimeUpdate = () => {
+      if (video.currentTime >= video.duration - 0.1 && !isReversing) {
+        isReversing = true;
+        video.playbackRate = -1;
+      } else if (video.currentTime <= 0.1 && isReversing) {
+        isReversing = false;
+        video.playbackRate = originalPlaybackRate;
+      }
+    };
+
+    video.addEventListener('timeupdate', handleTimeUpdate);
+    
+    return () => {
+      video.removeEventListener('timeupdate', handleTimeUpdate);
+    };
+  }, []);
+
   const scrollToForm = () => {
     const element = document.getElementById('contact-form');
     if (element) {
@@ -11,7 +38,13 @@ const HeroSection = () => {
   };
   return <section id="hero" className="relative min-h-screen flex items-center justify-start overflow-hidden">
       {/* Background Video */}
-      <video autoPlay muted loop playsInline className="absolute top-0 left-0 w-full h-full object-cover z-0">
+      <video 
+        ref={videoRef}
+        autoPlay 
+        muted 
+        playsInline 
+        className="absolute top-0 left-0 w-full h-full object-cover z-0"
+      >
         <source src="http://cdn.bornsite.ru/static/backAInew.mp4" type="video/mp4" />
       </video>
 
