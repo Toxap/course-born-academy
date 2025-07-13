@@ -177,6 +177,12 @@ const PricingSection = () => {
                   </ul>
 
                   <Button 
+                    onClick={() => {
+                      const element = document.getElementById('contact-form');
+                      if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }}
                     className={`w-full mt-6 font-semibold py-3 px-6 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg ${
                       plan.isPopular 
                         ? 'bg-red-600 hover:bg-red-700 text-white' 

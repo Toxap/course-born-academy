@@ -96,7 +96,7 @@ const ContactFormSection = () => {
   };
 
   return (
-    <section ref={sectionRef} className="py-20 bg-slate-900 relative overflow-hidden">
+    <section id="contact-form" ref={sectionRef} className="py-20 bg-slate-900 relative overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 pointer-events-none opacity-5">
         <div className="absolute top-20 left-20 text-red-400/20 animate-pulse">

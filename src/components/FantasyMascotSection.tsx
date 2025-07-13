@@ -36,6 +36,12 @@ const FantasyMascotSection = () => {
             
             <div className="flex flex-col sm:flex-row gap-4">
               <Button 
+                onClick={() => {
+                  const element = document.getElementById('contact-form');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
                 size="lg" 
                 className="bg-red-900 hover:bg-red-800 text-white font-semibold py-4 px-8 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg"
               >

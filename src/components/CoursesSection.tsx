@@ -205,7 +205,15 @@ const CoursesSection = () => {
                       </ul>
                     </div>
 
-                    <Button className="w-full bg-red-900 hover:bg-red-800 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                    <Button 
+                      onClick={() => {
+                        const element = document.getElementById('contact-form');
+                        if (element) {
+                          element.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      }}
+                      className="w-full bg-red-900 hover:bg-red-800 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                    >
                       Начать обучение
                     </Button>
                   </div>

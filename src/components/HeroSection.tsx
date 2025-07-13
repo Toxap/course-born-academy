@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { ArrowDown } from "lucide-react";
 const HeroSection = () => {
-  const scrollToCourses = () => {
-    const element = document.getElementById('courses');
+  const scrollToForm = () => {
+    const element = document.getElementById('contact-form');
     if (element) {
       element.scrollIntoView({
         behavior: 'smooth'
@@ -38,7 +38,7 @@ const HeroSection = () => {
           <Button 
             variant="hero"
             size="lg"
-            onClick={scrollToCourses}
+            onClick={scrollToForm}
             className="bg-red-600 hover:bg-red-700 text-white font-semibold px-8 py-4 text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-red-600/30"
           >
             Начать обучение
