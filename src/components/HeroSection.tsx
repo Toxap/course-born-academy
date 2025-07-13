@@ -27,7 +27,7 @@ const HeroSection = () => {
       </div>
 
       {/* Context and CTA - separate positioned element */}
-      <div className="absolute right-8 top-1/2 transform -translate-y-1/2 z-20 text-right max-w-xl">
+      <div className="absolute right-8 top-2/3 transform -translate-y-1/2 z-20 text-right max-w-xl">
         <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
           Революционная платформа для изучения программирования с искусственным интеллектом. 
           Персонализированное обучение, практические проекты и менторство ИИ.
