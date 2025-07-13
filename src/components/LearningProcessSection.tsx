@@ -109,8 +109,8 @@ const LearningProcessSection = () => {
               style={{ height: `${(scrollProgress * 100)}%` }}
             >
               {/* Moving arrow at the end of progress line */}
-              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
-                <div className="w-0 h-0 border-l-4 border-r-4 border-t-8 border-transparent border-t-red-500 animate-bounce"></div>
+              <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2">
+                <div className="w-0 h-0 border-l-6 border-r-6 border-t-12 border-transparent border-t-red-500 animate-bounce drop-shadow-lg"></div>
               </div>
             </div>
           </div>
@@ -133,9 +133,14 @@ const LearningProcessSection = () => {
                   onMouseEnter={() => setHoveredPhase(index)}
                   onMouseLeave={() => setHoveredPhase(null)}
                 >
-                  {/* Connection line to center */}
-                  <div className={`hidden lg:block absolute top-8 w-8 h-0.5 bg-red-600/50 transition-all duration-300 ${
+                  {/* Extended connection line to center */}
+                  <div className={`hidden lg:block absolute top-8 w-12 h-0.5 bg-red-600 transition-all duration-300 ${
                     isEven ? 'right-0' : 'left-0'
+                  } ${isActive ? 'opacity-100 shadow-red-600/50 shadow-lg' : 'opacity-30'}`} />
+                  
+                  {/* Additional connecting segment */}
+                  <div className={`hidden lg:block absolute top-8 w-2 h-0.5 transition-all duration-300 ${
+                    isEven ? 'right-12 bg-red-500' : 'left-12 bg-red-500'
                   } ${isActive ? 'opacity-100' : 'opacity-30'}`} />
                   
                   {/* Phase card with advanced animations */}
