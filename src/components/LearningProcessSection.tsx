@@ -127,7 +127,7 @@ const LearningProcessSection = () => {
               return (
                 <div
                   key={phase.id}
-                  className={`relative transition-all duration-700 ${
+                  className={`relative transition-all duration-700 min-h-96 ${
                     isActive 
                       ? 'opacity-100 translate-y-0 scale-100' 
                       : 'opacity-30 translate-y-8 scale-95'
