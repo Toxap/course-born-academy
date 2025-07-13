@@ -110,7 +110,7 @@ const WhyUsSection = () => {
                 }`}></div>
                 
                 {/* Main card */}
-                <div className="relative bg-slate-800 rounded-3xl border-2 border-red-900/50 p-8 hover:border-red-600/70 transition-all duration-500 hover:shadow-2xl hover:shadow-red-900/20 hover:-translate-y-2 overflow-hidden">
+                <div className="relative bg-slate-800 rounded-3xl border-2 border-red-900/50 p-8 hover:border-red-600/70 transition-all duration-500 hover:shadow-2xl hover:shadow-red-900/20 hover:-translate-y-2 overflow-hidden h-full flex flex-col">
                   
                   {/* Animated background pattern */}
                   <div className="absolute inset-0 opacity-5">
@@ -123,7 +123,7 @@ const WhyUsSection = () => {
                   </div>
                   
                   {/* Floating number indicator */}
-                  <div className="absolute -top-3 -right-3 w-8 h-8 bg-red-600 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-lg">
+                  <div className="absolute -top-3 -right-3 w-10 h-10 bg-red-600 border-2 border-white rounded-full flex items-center justify-center text-white text-base font-bold shadow-xl z-20">
                     {index + 1}
                   </div>
                   
