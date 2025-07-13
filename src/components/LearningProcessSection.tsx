@@ -110,7 +110,7 @@ const LearningProcessSection = () => {
             >
               {/* Moving arrow at the end of progress line */}
               <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2">
-                <div className="w-0 h-0 border-l-6 border-r-6 border-t-12 border-transparent border-t-red-500 animate-bounce drop-shadow-lg"></div>
+                <div className="w-0 h-0 border-l-[6px] border-r-[6px] border-t-[12px] border-transparent border-t-red-500 animate-bounce drop-shadow-lg"></div>
               </div>
             </div>
           </div>
