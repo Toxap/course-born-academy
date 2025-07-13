@@ -123,7 +123,7 @@ const WhyUsSection = () => {
                   </div>
                   
                   {/* Floating number indicator */}
-                  <div className="absolute -top-3 -right-3 w-10 h-10 bg-red-600 border-2 border-white rounded-full flex items-center justify-center text-white text-base font-bold shadow-xl z-20">
+                  <div className="absolute -top-4 -right-4 w-12 h-12 bg-white border-4 border-red-600 rounded-full flex items-center justify-center text-red-600 text-xl font-black shadow-2xl shadow-red-600/50 z-20 ring-2 ring-white">
                     {index + 1}
                   </div>
                   
