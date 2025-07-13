@@ -108,9 +108,12 @@ const LearningProcessSection = () => {
               className="w-full bg-gradient-to-b from-red-600 via-red-500 to-red-400 transition-all duration-500 rounded-full shadow-lg shadow-red-600/50 relative"
               style={{ height: `${(scrollProgress * 100)}%` }}
             >
-              {/* Moving arrow at the end of progress line */}
-              <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2">
-                <div className="w-0 h-0 border-l-[6px] border-r-[6px] border-t-[12px] border-transparent border-t-red-500 animate-bounce drop-shadow-lg"></div>
+              {/* Moving arrow that follows the progress */}
+              <div 
+                className="absolute left-1/2 transform -translate-x-1/2 transition-all duration-300"
+                style={{ top: `${Math.max(0, (scrollProgress * 100) - 2)}%` }}
+              >
+                <div className="w-0 h-0 border-l-[6px] border-r-[6px] border-t-[12px] border-transparent border-t-red-500 animate-pulse drop-shadow-lg"></div>
               </div>
             </div>
           </div>
