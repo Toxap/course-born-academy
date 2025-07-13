@@ -19,11 +19,29 @@ const HeroSection = () => {
       <div className="absolute top-0 left-0 w-full h-full bg-navy/60 z-10"></div>
 
       {/* Hero Content */}
-      <div className="relative z-20 text-left px-8 py-0">
-        <h1 className="text-6xl md:text-8xl text-white leading-tight lg:text-8xl font-bold text-left">
+      <div className="relative z-20 text-left px-8 py-0 max-w-4xl">
+        <h1 className="text-6xl md:text-8xl text-white leading-tight lg:text-8xl font-bold text-left mb-6">
           <span className="mx-[44px] text-slate-200">Course</span>
           <span className="block mx-0 my-0 px-[237px] text-red-700">Born</span>
         </h1>
+        
+        {/* Context */}
+        <p className="text-xl md:text-2xl text-gray-300 mb-8 mx-[44px] leading-relaxed">
+          Революционная платформа для изучения программирования с искусственным интеллектом. 
+          Персонализированное обучение, практические проекты и менторство ИИ.
+        </p>
+        
+        {/* CTA Button */}
+        <div className="mx-[44px]">
+          <Button 
+            variant="hero"
+            size="lg"
+            onClick={scrollToCourses}
+            className="bg-red-600 hover:bg-red-700 text-white font-semibold px-8 py-4 text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-red-600/30"
+          >
+            Начать обучение
+          </Button>
+        </div>
       </div>
 
       {/* Login Button */}
