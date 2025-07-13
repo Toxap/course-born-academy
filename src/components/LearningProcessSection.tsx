@@ -144,7 +144,7 @@ const LearningProcessSection = () => {
                   } ${isActive ? 'opacity-100' : 'opacity-30'}`} />
                   
                   {/* Phase card with advanced animations */}
-                  <div className={`group relative bg-slate-800 rounded-3xl border-2 border-red-900/50 p-8 transition-all duration-500 hover:border-red-600/70 hover:shadow-2xl hover:shadow-red-900/20 overflow-hidden h-96 flex flex-col ${
+                  <div className={`group relative bg-slate-800 rounded-3xl border-2 border-red-900/50 p-8 transition-all duration-500 hover:border-red-600/70 hover:shadow-2xl hover:shadow-red-900/20 overflow-hidden min-h-96 flex flex-col ${
                     hoveredPhase === index ? 'transform hover:-translate-y-4' : ''
                   }`}>
                     
