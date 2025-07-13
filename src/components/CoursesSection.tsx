@@ -58,23 +58,6 @@ const CoursesSection = () => {
       students: "1,200+",
       employment: "91%",
       icon: Server
-    },
-    {
-      id: 4,
-      title: "Data Science",
-      description: "Анализ данных и машинное обучение. Изучите Python, работу с большими данными и создание предсказательных моделей.",
-      features: [
-        "Python для анализа данных",
-        "Pandas, NumPy, Matplotlib",
-        "Машинное обучение",
-        "Работа с Big Data",
-        "Развертывание ML-моделей"
-      ],
-      duration: "5 месяцев",
-      level: "Продвинутый", 
-      students: "900+",
-      employment: "78%",
-      icon: Database
     }
   ];
 
@@ -143,23 +126,24 @@ const CoursesSection = () => {
           </div>
         </div>
 
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-6xl mx-auto relative">
+          <button
+            onClick={prevCourse}
+            className="absolute -left-16 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-slate-800 rounded-lg border border-slate-700 flex items-center justify-center text-gray-400 hover:text-white hover:border-red-600 hover:bg-red-900/20 transition-all duration-300 hover:scale-110"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+          
+          <button
+            onClick={nextCourse}
+            className="absolute -right-16 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-slate-800 rounded-lg border border-slate-700 flex items-center justify-center text-gray-400 hover:text-white hover:border-red-600 hover:bg-red-900/20 transition-all duration-300 hover:scale-110"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+          
           <div className="relative">
-            <button
-              onClick={prevCourse}
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-slate-800 rounded-lg border border-slate-700 flex items-center justify-center text-gray-400 hover:text-white hover:border-red-600 hover:bg-red-900/20 transition-all duration-300 hover:scale-110"
-            >
-              <ChevronLeft className="w-6 h-6" />
-            </button>
-            
-            <button
-              onClick={nextCourse}
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-slate-800 rounded-lg border border-slate-700 flex items-center justify-center text-gray-400 hover:text-white hover:border-red-600 hover:bg-red-900/20 transition-all duration-300 hover:scale-110"
-            >
-              <ChevronRight className="w-6 h-6" />
-            </button>
 
-            <div className="relative overflow-hidden">
+            <div className="overflow-hidden">
               <div 
                 className={`bg-slate-800 rounded-2xl border-2 border-red-900/50 shadow-xl transition-all duration-300 ease-in-out transform ${
                   isTransitioning 
