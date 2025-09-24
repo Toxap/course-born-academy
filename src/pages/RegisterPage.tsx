@@ -11,15 +11,29 @@ const RegisterPage = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (password !== confirmPassword) {
-      alert("Пароли не совпадают!");
-      return;
-    }
-    // TODO: подключить API для регистрации
-    console.log("Register:", { name, email, password });
-  };
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  if (password !== confirmPassword) {
+    alert("Пароли не совпадают!");
+    return;
+  }
+  try {
+    const res = await fetch("http://localhost:8000/auth/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, password }),
+    });
+
+    if (!res.ok) throw new Error("Ошибка регистрации");
+    const user = await res.json();
+
+    localStorage.setItem("userId", user.id);
+
+    navigate("/dashboard");
+  } catch (err) {
+    alert("Ошибка при регистрации");
+  }
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-900">

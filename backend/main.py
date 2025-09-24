@@ -1,0 +1,27 @@
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from routers import auth, users, courses
+from database import Base, engine
+
+# Создание таблиц
+Base.metadata.create_all(bind=engine)
+
+app = FastAPI(title="Courseborn API")
+
+# Разрешаем CORS для фронта
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:8080"],  # фронт у тебя на 8080
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Подключаем роутеры
+app.include_router(auth.router, prefix="/auth", tags=["Auth"])
+app.include_router(users.router, prefix="/users", tags=["Users"])
+app.include_router(courses.router, prefix="/courses", tags=["Courses"])
+
+@app.get("/")
+def root():
+    return {"message": "Courseborn API is running"}

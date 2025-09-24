@@ -9,11 +9,26 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // TODO: подключить API для авторизации
-    console.log("Login:", { email, password });
-  };
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  try {
+    const res = await fetch("http://localhost:8000/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+
+    if (!res.ok) throw new Error("Ошибка авторизации");
+    const user = await res.json();
+
+    // TODO: позже заменить на JWT
+    localStorage.setItem("userId", user.id);
+
+    navigate("/dashboard");
+  } catch (err) {
+    alert("Неверный email или пароль");
+  }
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-900">
