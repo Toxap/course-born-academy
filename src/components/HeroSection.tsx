@@ -1,9 +1,12 @@
 import { useCallback, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowDown } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+
 
 const HeroSection = () => {
   const [isVideoAvailable, setIsVideoAvailable] = useState(true);
+  const navigate = useNavigate();
 
   const scrollToForm = useCallback(() => {
     if (typeof window === "undefined") {
@@ -55,7 +58,7 @@ const HeroSection = () => {
         
         {/* CTA Button */}
         <div>
-          <Button 
+          <Button
             variant="hero"
             size="lg"
             onClick={scrollToForm}
@@ -69,7 +72,8 @@ const HeroSection = () => {
       {/* Login Button */}
       <div className="absolute top-8 right-8 z-20">
         <Button 
-          variant="ghost" 
+          variant="ghost"
+          onClick={() => navigate("/login")}
           className="text-white/80 hover:text-white hover:bg-white/10 border border-white/20 hover:border-white/40 backdrop-blur-sm"
         >
           Войти
