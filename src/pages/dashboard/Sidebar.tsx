@@ -2,6 +2,15 @@ import { Button } from "@/components/ui/button";
 import { Home, BookOpen, User, LogOut, Edit3, Sun, Moon } from "lucide-react";
 
 export default function Sidebar({ user, theme, setTheme, setIsProfileOpen, setActivePage }) {
+
+    if (!user) {
+  return (
+    <aside className="w-64 p-6">
+      <p>Загрузка...</p>
+    </aside>
+  );
+}
+
   return (
     <aside className={`${theme === "dark" ? "bg-gray-900 border-red-800" : "bg-gray-100 border-gray-300"} w-64 border-r p-6 flex flex-col gap-6 relative z-10`}>
       <div className="flex items-center gap-4 mb-4">

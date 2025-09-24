@@ -12,7 +12,15 @@ export default function UserDashboard() {
   const [activePage, setActivePage] = useState("courses");
   const [profileTab, setProfileTab] = useState("info");
   const navigate = useNavigate();
-  const [user, setUser] = useState<never>(null);
+
+  interface User {
+  id: number;
+  name: string;
+  avatar: string;
+  password?: string;
+}
+
+const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
   const userId = localStorage.getItem("userId");
