@@ -1,30 +1,30 @@
 import { Search, UserCheck, Trophy } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
+const STEPS = [
+  {
+    icon: Search,
+    number: "01",
+    title: "Выбираете курс",
+    description: "Изучаете программу обучения и выбираете подходящий курс из нашего каталога"
+  },
+  {
+    icon: UserCheck,
+    number: "02",
+    title: "Занимаетесь с наставником",
+    description: "Проходите теорию, выполняете практические задания под руководством опытного ментора"
+  },
+  {
+    icon: Trophy,
+    number: "03",
+    title: "Получаете навыки и портфолио",
+    description: "Завершаете обучение с готовыми проектами и навыками для трудоустройства"
+  }
+] as const;
+
 const HowItWorksSection = () => {
   const [visibleSteps, setVisibleSteps] = useState<number[]>([]);
   const sectionRef = useRef<HTMLElement>(null);
-
-  const steps = [
-    {
-      icon: Search,
-      number: "01",
-      title: "Выбираете курс",
-      description: "Изучаете программу обучения и выбираете подходящий курс из нашего каталога"
-    },
-    {
-      icon: UserCheck,
-      number: "02", 
-      title: "Занимаетесь с наставником",
-      description: "Проходите теорию, выполняете практические задания под руководством опытного ментора"
-    },
-    {
-      icon: Trophy,
-      number: "03",
-      title: "Получаете навыки и портфолио",
-      description: "Завершаете обучение с готовыми проектами и навыками для трудоустройства"
-    }
-  ];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -78,7 +78,7 @@ const HowItWorksSection = () => {
             <div className="absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-red-600/30"></div>
             
             <div className="space-y-16">
-              {steps.map((step, index) => {
+              {STEPS.map((step, index) => {
                 const IconComponent = step.icon;
                 const isVisible = visibleSteps.includes(index);
                 

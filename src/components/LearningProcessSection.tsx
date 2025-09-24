@@ -1,62 +1,62 @@
 import { useState, useEffect, useRef } from "react";
 import { Code, Zap, Trophy, Users, Brain, Rocket, Play, ChevronRight } from "lucide-react";
 
+const PHASES = [
+  {
+    id: "foundation",
+    title: "Основы",
+    icon: Code,
+    description: "Изучаем синтаксис языка и базовые концепции программирования",
+    duration: "2-3 недели",
+    skills: ["HTML/CSS", "JavaScript", "Git"]
+  },
+  {
+    id: "practice",
+    title: "Практика",
+    icon: Zap,
+    description: "Работаем с реальными задачами и создаем первые проекты",
+    duration: "4-6 недель",
+    skills: ["React", "API", "Проекты"]
+  },
+  {
+    id: "mastery",
+    title: "Мастерство",
+    icon: Trophy,
+    description: "Создаем полноценные приложения и изучаем лучшие практики",
+    duration: "6-8 недель",
+    skills: ["TypeScript", "Testing", "Деплой"]
+  },
+  {
+    id: "teamwork",
+    title: "Командная работа",
+    icon: Users,
+    description: "Участвуем в групповых проектах и изучаем методологии разработки",
+    duration: "2-3 недели",
+    skills: ["Agile", "Code Review", "Teamwork"]
+  },
+  {
+    id: "expertise",
+    title: "Экспертиза",
+    icon: Brain,
+    description: "Углубляемся в архитектурные паттерны и оптимизацию",
+    duration: "3-4 недели",
+    skills: ["Архитектура", "Performance", "Patterns"]
+  },
+  {
+    id: "career",
+    title: "Карьера",
+    icon: Rocket,
+    description: "Подготовка портфолио, собеседования и поиск работы",
+    duration: "2-3 недели",
+    skills: ["Портфолио", "CV", "Собеседования"]
+  }
+] as const;
+
 const LearningProcessSection = () => {
   const [activePhase, setActivePhase] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [hoveredPhase, setHoveredPhase] = useState<number | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
-
-  const phases = [
-    {
-      id: "foundation",
-      title: "Основы",
-      icon: Code,
-      description: "Изучаем синтаксис языка и базовые концепции программирования",
-      duration: "2-3 недели",
-      skills: ["HTML/CSS", "JavaScript", "Git"]
-    },
-    {
-      id: "practice", 
-      title: "Практика",
-      icon: Zap,
-      description: "Работаем с реальными задачами и создаем первые проекты",
-      duration: "4-6 недель",
-      skills: ["React", "API", "Проекты"]
-    },
-    {
-      id: "mastery",
-      title: "Мастерство",
-      icon: Trophy,
-      description: "Создаем полноценные приложения и изучаем лучшие практики",
-      duration: "6-8 недель", 
-      skills: ["TypeScript", "Testing", "Деплой"]
-    },
-    {
-      id: "teamwork",
-      title: "Командная работа",
-      icon: Users,
-      description: "Участвуем в групповых проектах и изучаем методологии разработки",
-      duration: "2-3 недели",
-      skills: ["Agile", "Code Review", "Teamwork"]
-    },
-    {
-      id: "expertise",
-      title: "Экспертиза",
-      icon: Brain,
-      description: "Углубляемся в архитектурные паттерны и оптимизацию",
-      duration: "3-4 недели",
-      skills: ["Архитектура", "Performance", "Patterns"]
-    },
-    {
-      id: "career",
-      title: "Карьера",
-      icon: Rocket,
-      description: "Подготовка портфолио, собеседования и поиск работы",
-      duration: "2-3 недели",
-      skills: ["Портфолио", "CV", "Собеседования"]
-    }
-  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -66,14 +66,14 @@ const LearningProcessSection = () => {
         const progress = Math.max(0, Math.min(1, (windowHeight - rect.top) / windowHeight));
         setScrollProgress(progress);
         
-        const phaseIndex = Math.floor(progress * phases.length);
-        setActivePhase(Math.min(phaseIndex, phases.length - 1));
+        const phaseIndex = Math.floor(progress * PHASES.length);
+        setActivePhase(Math.min(phaseIndex, PHASES.length - 1));
       }
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [phases.length]);
+  }, []);
 
   return (
     <section ref={sectionRef} className="py-20 bg-slate-900 relative overflow-hidden">
@@ -119,7 +119,7 @@ const LearningProcessSection = () => {
           </div>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {phases.map((phase, index) => {
+            {PHASES.map((phase, index) => {
               const IconComponent = phase.icon;
               const isActive = index <= activePhase;
               const isEven = index % 2 === 0;

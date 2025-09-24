@@ -3,19 +3,28 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
-import { 
-  User, 
-  Mail, 
-  Phone, 
-  MessageSquare, 
-  Send, 
-  CheckCircle, 
+import {
+  User,
+  Mail,
+  Phone,
+  MessageSquare,
+  Send,
+  CheckCircle,
   Zap,
   Star,
   BookOpen,
   Code
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+
+const COURSES = [
+  "Python разработка",
+  "Frontend разработка",
+  "Full Stack разработка",
+  "Data Science",
+  "DevOps",
+  "UX/UI Design"
+] as const;
 
 const ContactFormSection = () => {
   const [visibleElements, setVisibleElements] = useState<number[]>([]);
@@ -29,38 +38,44 @@ const ContactFormSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const animationTimeoutsRef = useRef<ReturnType<typeof setTimeout>[]>([]);
+  const resetTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { toast } = useToast();
-
-  const courses = [
-    "Python разработка",
-    "Frontend разработка", 
-    "Full Stack разработка",
-    "Data Science",
-    "DevOps",
-    "UX/UI Design"
-  ];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          if (animationTimeoutsRef.current.length === 0) {
             [0, 1, 2, 3].forEach((index) => {
-              setTimeout(() => {
-                setVisibleElements(prev => prev.includes(index) ? prev : [...prev, index]);
+              const timeoutId = window.setTimeout(() => {
+                setVisibleElements(prev => (prev.includes(index) ? prev : [...prev, index]));
               }, index * 200);
+
+              animationTimeoutsRef.current.push(timeoutId);
             });
           }
+
+          observer.unobserve(entry.target);
         });
       },
       { threshold: 0.1 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    const currentSection = sectionRef.current;
+    if (currentSection) {
+      observer.observe(currentSection);
     }
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      animationTimeoutsRef.current.forEach(timeoutId => clearTimeout(timeoutId));
+      animationTimeoutsRef.current = [];
+    };
   }, []);
 
   const handleInputChange = (field: string, value: string) => {
@@ -83,7 +98,11 @@ const ContactFormSection = () => {
     });
 
     // Сброс формы через 3 секунды
-    setTimeout(() => {
+    if (resetTimeoutRef.current) {
+      clearTimeout(resetTimeoutRef.current);
+    }
+
+    resetTimeoutRef.current = window.setTimeout(() => {
       setIsSubmitted(false);
       setFormData({
         name: "",
@@ -92,8 +111,18 @@ const ContactFormSection = () => {
         course: "",
         message: ""
       });
+      resetTimeoutRef.current = null;
     }, 3000);
   };
+
+  useEffect(() => {
+    return () => {
+      if (resetTimeoutRef.current) {
+        clearTimeout(resetTimeoutRef.current);
+        resetTimeoutRef.current = null;
+      }
+    };
+  }, []);
 
   return (
     <section id="contact-form" ref={sectionRef} className="py-20 bg-slate-900 relative overflow-hidden">
@@ -229,7 +258,7 @@ const ContactFormSection = () => {
                           className="w-full pl-12 h-12 bg-slate-700 border border-red-900/50 rounded-md text-gray-200 focus:border-red-600 focus:ring-1 focus:ring-red-600/20 transition-all appearance-none cursor-pointer"
                         >
                           <option value="">Выберите курс</option>
-                          {courses.map((course, index) => (
+                          {COURSES.map((course, index) => (
                             <option key={index} value={course} className="bg-slate-700">
                               {course}
                             </option>

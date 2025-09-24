@@ -7,45 +7,45 @@ import {
 import { useState, useEffect, useRef } from "react";
 import { HelpCircle, Plus, Minus, Zap, MessageCircle, Clock, Award, Users } from "lucide-react";
 
+const FAQ_ITEMS = [
+  {
+    question: "Подходят ли курсы для новичков?",
+    answer: "Да, большинство наших курсов разработаны специально для людей без опыта программирования. Мы начинаем с самых основ и постепенно переходим к более сложным темам.",
+    icon: Users
+  },
+  {
+    question: "Сколько времени нужно уделять обучению?",
+    answer: "Рекомендуется заниматься 10-15 часов в неделю. Это позволит комфортно усваивать материал и выполнять практические задания.",
+    icon: Clock
+  },
+  {
+    question: "Есть ли поддержка после окончания курса?",
+    answer: "Да, мы предоставляем поддержку в течение 6 месяцев после завершения курса, включая помощь с трудоустройством и консультации по проектам.",
+    icon: MessageCircle
+  },
+  {
+    question: "Какие технические требования для обучения?",
+    answer: "Вам понадобится компьютер с доступом в интернет. Все необходимое программное обеспечение бесплатное, мы поможем с установкой и настройкой.",
+    icon: Zap
+  },
+  {
+    question: "Можно ли получить сертификат по окончанию?",
+    answer: "Да, после успешного завершения курса и защиты финального проекта вы получите сертификат, который можно указать в резюме.",
+    icon: Award
+  }
+] as const;
+
 const FAQSection = () => {
   const [visibleCards, setVisibleCards] = useState<number[]>([]);
   const [expandedItem, setExpandedItem] = useState<string | undefined>(undefined);
   const sectionRef = useRef<HTMLElement>(null);
-
-  const faqs = [
-    {
-      question: "Подходят ли курсы для новичков?",
-      answer: "Да, большинство наших курсов разработаны специально для людей без опыта программирования. Мы начинаем с самых основ и постепенно переходим к более сложным темам.",
-      icon: Users
-    },
-    {
-      question: "Сколько времени нужно уделять обучению?",
-      answer: "Рекомендуется заниматься 10-15 часов в неделю. Это позволит комфортно усваивать материал и выполнять практические задания.",
-      icon: Clock
-    },
-    {
-      question: "Есть ли поддержка после окончания курса?",
-      answer: "Да, мы предоставляем поддержку в течение 6 месяцев после завершения курса, включая помощь с трудоустройством и консультации по проектам.",
-      icon: MessageCircle
-    },
-    {
-      question: "Какие технические требования для обучения?",
-      answer: "Вам понадобится компьютер с доступом в интернет. Все необходимое программное обеспечение бесплатное, мы поможем с установкой и настройкой.",
-      icon: Zap
-    },
-    {
-      question: "Можно ли получить сертификат по окончанию?",
-      answer: "Да, после успешного завершения курса и защиты финального проекта вы получите сертификат, который можно указать в резюме.",
-      icon: Award
-    }
-  ];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            faqs.forEach((_, index) => {
+            FAQ_ITEMS.forEach((_, index) => {
               setTimeout(() => {
                 setVisibleCards(prev => prev.includes(index) ? prev : [...prev, index]);
               }, index * 150);
@@ -98,7 +98,7 @@ const FAQSection = () => {
             value={expandedItem}
             onValueChange={setExpandedItem}
           >
-            {faqs.map((faq, index) => {
+            {FAQ_ITEMS.map((faq, index) => {
               const isVisible = visibleCards.includes(index);
               const isExpanded = expandedItem === `item-${index}`;
               const Icon = faq.icon;
