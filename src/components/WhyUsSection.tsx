@@ -1,43 +1,43 @@
 import { useState, useEffect } from "react";
 import { Users, Code2, UserCheck, Briefcase, Star, Zap, Award } from "lucide-react";
 
+const ADVANTAGES = [
+  {
+    icon: Users,
+    title: "Опытные наставники",
+    description: "Менторы из IT-индустрии с практическим опытом работы в крупных компаниях",
+    stats: "50+ менторов",
+    color: "red"
+  },
+  {
+    icon: Code2,
+    title: "Реальные проекты",
+    description: "Работающие программы и приложения для портфолио с использованием современных технологий",
+    stats: "200+ проектов",
+    color: "red"
+  },
+  {
+    icon: UserCheck,
+    title: "Индивидуальный подход",
+    description: "Персональный план обучения под ваши цели и график работы",
+    stats: "1:1 менторинг",
+    color: "red"
+  },
+  {
+    icon: Briefcase,
+    title: "Помощь с трудоустройством",
+    description: "Поддержка в поиске работы, подготовка к собеседованиям и составление резюме",
+    stats: "85% трудоустройство",
+    color: "red"
+  }
+] as const;
+
 const WhyUsSection = () => {
-  const [cardsVisible, setCardsVisible] = useState([false, false, false, false]);
+  const [cardsVisible, setCardsVisible] = useState<boolean[]>(() => Array(ADVANTAGES.length).fill(false));
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
-  const advantages = [
-    {
-      icon: Users,
-      title: "Опытные наставники", 
-      description: "Менторы из IT-индустрии с практическим опытом работы в крупных компаниях",
-      stats: "50+ менторов",
-      color: "red"
-    },
-    {
-      icon: Code2,
-      title: "Реальные проекты",
-      description: "Работающие программы и приложения для портфолио с использованием современных технологий",
-      stats: "200+ проектов",
-      color: "red"
-    },
-    {
-      icon: UserCheck,
-      title: "Индивидуальный подход",
-      description: "Персональный план обучения под ваши цели и график работы",
-      stats: "1:1 менторинг",
-      color: "red"
-    },
-    {
-      icon: Briefcase,
-      title: "Помощь с трудоустройством", 
-      description: "Поддержка в поиске работы, подготовка к собеседованиям и составление резюме",
-      stats: "85% трудоустройство",
-      color: "red"
-    }
-  ];
-
   useEffect(() => {
-    const cardTimers = advantages.map((_, index) => 
+    const cardTimers = ADVANTAGES.map((_, index) =>
       setTimeout(() => {
         setCardsVisible(prev => {
           const newState = [...prev];
@@ -89,7 +89,7 @@ const WhyUsSection = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {advantages.map((advantage, index) => {
+          {ADVANTAGES.map((advantage, index) => {
             const IconComponent = advantage.icon;
             
             return (

@@ -2,6 +2,63 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Star, Quote, ChevronLeft, ChevronRight, Play, Pause } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
+const TESTIMONIALS = [
+  {
+    name: "Алексей Петров",
+    role: "Junior Python Developer",
+    photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+    text: "За 3 месяца с нуля освоил Python и получил первую работу. Наставники действительно помогли разобраться во всех тонкостях.",
+    rating: 5,
+    company: "Tech Corp",
+    salary: "от 80,000 ₽"
+  },
+  {
+    name: "Мария Сидорова",
+    role: "Frontend Developer",
+    photo: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
+    text: "Отличные курсы по веб-разработке! Особенно понравился индивидуальный подход и помощь с портфолио.",
+    rating: 5,
+    company: "StartupX",
+    salary: "от 90,000 ₽"
+  },
+  {
+    name: "Дмитрий Козлов",
+    role: "Data Scientist",
+    photo: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+    text: "Курс по Data Science превзошел ожидания. Много практики с реальными данными и проектами.",
+    rating: 5,
+    company: "DataLab",
+    salary: "от 120,000 ₽"
+  },
+  {
+    name: "Елена Волкова",
+    role: "Full Stack Developer",
+    photo: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+    text: "Невероятно структурированная программа! Изучила и фронтенд, и бэкенд. Теперь работаю в международной компании.",
+    rating: 5,
+    company: "GlobalTech",
+    salary: "от 150,000 ₽"
+  },
+  {
+    name: "Андрей Смирнов",
+    role: "DevOps Engineer",
+    photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
+    text: "Курс DevOps дал мне возможность кардинально изменить карьеру. Отличные преподаватели и актуальные знания.",
+    rating: 5,
+    company: "CloudSys",
+    salary: "от 130,000 ₽"
+  },
+  {
+    name: "София Кузнецова",
+    role: "UX/UI Designer",
+    photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face",
+    text: "Превосходное обучение дизайну! Научилась создавать красивые и функциональные интерфейсы. Портфолио помогло найти работу мечты.",
+    rating: 5,
+    company: "DesignHub",
+    salary: "от 70,000 ₽"
+  }
+] as const;
+
 const TestimonialsSection = () => {
   const [visibleCards, setVisibleCards] = useState<number[]>([]);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
@@ -9,69 +66,12 @@ const TestimonialsSection = () => {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
-  const testimonials = [
-    {
-      name: "Алексей Петров",
-      role: "Junior Python Developer",
-      photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
-      text: "За 3 месяца с нуля освоил Python и получил первую работу. Наставники действительно помогли разобраться во всех тонкостях.",
-      rating: 5,
-      company: "Tech Corp",
-      salary: "от 80,000 ₽"
-    },
-    {
-      name: "Мария Сидорова", 
-      role: "Frontend Developer",
-      photo: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
-      text: "Отличные курсы по веб-разработке! Особенно понравился индивидуальный подход и помощь с портфолио.",
-      rating: 5,
-      company: "StartupX",
-      salary: "от 90,000 ₽"
-    },
-    {
-      name: "Дмитрий Козлов",
-      role: "Data Scientist", 
-      photo: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
-      text: "Курс по Data Science превзошел ожидания. Много практики с реальными данными и проектами.",
-      rating: 5,
-      company: "DataLab",
-      salary: "от 120,000 ₽"
-    },
-    {
-      name: "Елена Волкова",
-      role: "Full Stack Developer",
-      photo: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
-      text: "Невероятно структурированная программа! Изучила и фронтенд, и бэкенд. Теперь работаю в международной компании.",
-      rating: 5,
-      company: "GlobalTech",
-      salary: "от 150,000 ₽"
-    },
-    {
-      name: "Андрей Смирнов",
-      role: "DevOps Engineer",
-      photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
-      text: "Курс DevOps дал мне возможность кардинально изменить карьеру. Отличные преподаватели и актуальные знания.",
-      rating: 5,
-      company: "CloudSys",
-      salary: "от 130,000 ₽"
-    },
-    {
-      name: "София Кузнецова",
-      role: "UX/UI Designer",
-      photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face",
-      text: "Превосходное обучение дизайну! Научилась создавать красивые и функциональные интерфейсы. Портфолио помогло найти работу мечты.",
-      rating: 5,
-      company: "DesignHub",
-      salary: "от 70,000 ₽"
-    }
-  ];
-
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            testimonials.forEach((_, index) => {
+            TESTIMONIALS.forEach((_, index) => {
               setTimeout(() => {
                 setVisibleCards(prev => prev.includes(index) ? prev : [...prev, index]);
               }, index * 150);
@@ -94,18 +94,18 @@ const TestimonialsSection = () => {
     if (!isAutoPlaying) return;
     
     const interval = setInterval(() => {
-      setCurrentTestimonial(prev => (prev + 1) % testimonials.length);
+      setCurrentTestimonial(prev => (prev + 1) % TESTIMONIALS.length);
     }, 4000);
 
     return () => clearInterval(interval);
-  }, [isAutoPlaying, testimonials.length]);
+  }, [isAutoPlaying]);
 
   const nextTestimonial = () => {
-    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+    setCurrentTestimonial((prev) => (prev + 1) % TESTIMONIALS.length);
   };
 
   const prevTestimonial = () => {
-    setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    setCurrentTestimonial((prev) => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
   };
 
   const toggleAutoPlay = () => {
@@ -176,7 +176,7 @@ const TestimonialsSection = () => {
                   transform: `translateX(-${currentTestimonial * 100}%)`
                 }}
               >
-                {testimonials.map((testimonial, index) => (
+                {TESTIMONIALS.map((testimonial, index) => (
                   <div key={index} className="w-full flex-shrink-0">
                     {/* Featured testimonial content */}
                     <div className="relative z-10 text-center">
@@ -229,7 +229,7 @@ const TestimonialsSection = () => {
 
             {/* Progress indicators */}
             <div className="flex justify-center space-x-2 mt-8">
-              {testimonials.map((_, index) => (
+              {TESTIMONIALS.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentTestimonial(index)}
@@ -246,7 +246,7 @@ const TestimonialsSection = () => {
 
         {/* Additional testimonials grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-          {testimonials.slice(0, 6).map((testimonial, index) => {
+          {TESTIMONIALS.slice(0, 6).map((testimonial, index) => {
             const isVisible = visibleCards.includes(index);
             const isFeatured = index === currentTestimonial;
             

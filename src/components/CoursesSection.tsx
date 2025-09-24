@@ -1,72 +1,72 @@
 import { Button } from "@/components/ui/button";
-import { Code, Database, Globe, Server, ChevronLeft, ChevronRight, Clock, Award, BookOpen, Users, Target } from "lucide-react";
+import { Code, Globe, Server, ChevronLeft, ChevronRight, Clock, Award, BookOpen, Users, Target } from "lucide-react";
 import { useState, useEffect } from "react";
+
+const COURSE_ITEMS = [
+  {
+    id: 1,
+    title: "Java-Разработчик",
+    description: "Полный курс Java разработки от основ до создания корпоративных приложений. Изучите объектно-ориентированное программирование, базы данных и Spring Framework.",
+    features: [
+      "Основы Java и ООП",
+      "Работа с базами данных",
+      "Spring Framework",
+      "Микросервисная архитектура",
+      "Тестирование приложений"
+    ],
+    duration: "6 месяцев",
+    level: "Начинающий",
+    students: "2,500+",
+    employment: "87%",
+    icon: Code
+  },
+  {
+    id: 2,
+    title: "Frontend Буткемп",
+    description: "Интенсивный курс frontend разработки. Изучите современные технологии: React, TypeScript, работу с API и создание адаптивных интерфейсов.",
+    features: [
+      "HTML5, CSS3, JavaScript",
+      "React и TypeScript",
+      "Работа с API",
+      "Адаптивный дизайн",
+      "Деплой проектов"
+    ],
+    duration: "3 месяца",
+    level: "Начинающий",
+    students: "1,800+",
+    employment: "82%",
+    icon: Globe
+  },
+  {
+    id: 3,
+    title: "Backend Буткемп",
+    description: "Изучите серверную разработку с Node.js. Создавайте API, работайте с базами данных, изучите архитектуру и безопасность приложений.",
+    features: [
+      "Node.js и Express",
+      "MongoDB/PostgreSQL",
+      "REST API и GraphQL",
+      "Аутентификация",
+      "Микросервисы"
+    ],
+    duration: "4 месяца",
+    level: "Продвинутый",
+    students: "1,200+",
+    employment: "91%",
+    icon: Server
+  }
+] as const;
 
 const CoursesSection = () => {
   const [currentCourse, setCurrentCourse] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [slideDirection, setSlideDirection] = useState<'left' | 'right'>('right');
 
-  const courses = [
-    {
-      id: 1,
-      title: "Java-Разработчик",
-      description: "Полный курс Java разработки от основ до создания корпоративных приложений. Изучите объектно-ориентированное программирование, базы данных и Spring Framework.",
-      features: [
-        "Основы Java и ООП",
-        "Работа с базами данных",
-        "Spring Framework", 
-        "Микросервисная архитектура",
-        "Тестирование приложений"
-      ],
-      duration: "6 месяцев",
-      level: "Начинающий",
-      students: "2,500+",
-      employment: "87%",
-      icon: Code
-    },
-    {
-      id: 2,
-      title: "Frontend Буткемп",
-      description: "Интенсивный курс frontend разработки. Изучите современные технологии: React, TypeScript, работу с API и создание адаптивных интерфейсов.",
-      features: [
-        "HTML5, CSS3, JavaScript",
-        "React и TypeScript",
-        "Работа с API",
-        "Адаптивный дизайн",
-        "Деплой проектов"
-      ],
-      duration: "3 месяца",
-      level: "Начинающий",
-      students: "1,800+", 
-      employment: "82%",
-      icon: Globe
-    },
-    {
-      id: 3,
-      title: "Backend Буткемп",
-      description: "Изучите серверную разработку с Node.js. Создавайте API, работайте с базами данных, изучите архитектуру и безопасность приложений.",
-      features: [
-        "Node.js и Express",
-        "MongoDB/PostgreSQL",
-        "REST API и GraphQL",
-        "Аутентификация",
-        "Микросервисы"
-      ],
-      duration: "4 месяца",
-      level: "Продвинутый",
-      students: "1,200+",
-      employment: "91%",
-      icon: Server
-    }
-  ];
-
   const nextCourse = () => {
     if (isTransitioning) return;
     setSlideDirection('right');
     setIsTransitioning(true);
     setTimeout(() => {
-      setCurrentCourse((prev) => (prev + 1) % courses.length);
+      setCurrentCourse((prev) => (prev + 1) % COURSE_ITEMS.length);
       setIsTransitioning(false);
     }, 150);
   };
@@ -76,7 +76,7 @@ const CoursesSection = () => {
     setSlideDirection('left');
     setIsTransitioning(true);
     setTimeout(() => {
-      setCurrentCourse((prev) => (prev - 1 + courses.length) % courses.length);
+      setCurrentCourse((prev) => (prev - 1 + COURSE_ITEMS.length) % COURSE_ITEMS.length);
       setIsTransitioning(false);
     }, 150);
   };
@@ -91,7 +91,7 @@ const CoursesSection = () => {
     }, 150);
   };
 
-  const course = courses[currentCourse];
+  const course = COURSE_ITEMS[currentCourse];
 
   return (
     <section id="courses" className="py-20 bg-slate-900">
@@ -107,7 +107,7 @@ const CoursesSection = () => {
 
         <div className="flex justify-center mb-8">
           <div className="flex space-x-4">
-            {courses.map((courseItem, index) => {
+            {COURSE_ITEMS.map((courseItem, index) => {
               const Icon = courseItem.icon;
               return (
                   <button

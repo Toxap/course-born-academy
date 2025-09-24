@@ -1,19 +1,39 @@
+import { useCallback, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowDown } from "lucide-react";
+
 const HeroSection = () => {
-  const scrollToForm = () => {
-    const element = document.getElementById('contact-form');
-    if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth'
-      });
+  const [isVideoAvailable, setIsVideoAvailable] = useState(true);
+
+  const scrollToForm = useCallback(() => {
+    if (typeof window === "undefined") {
+      return;
     }
-  };
-  return <section id="hero" className="relative min-h-screen flex items-center justify-start overflow-hidden">
+
+    const element = window.document.getElementById("contact-form");
+    element?.scrollIntoView({ behavior: "smooth" });
+  }, []);
+
+  return (
+    <section id="hero" className="relative min-h-screen flex items-center justify-start overflow-hidden">
       {/* Background Video */}
-      <video autoPlay muted loop playsInline className="absolute top-0 left-0 w-full h-full object-cover z-0">
-        <source src="http://cdn.bornsite.ru/static/backAInew.mp4" type="video/mp4" />
-      </video>
+      {isVideoAvailable ? (
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute top-0 left-0 w-full h-full object-cover z-0"
+          onError={() => setIsVideoAvailable(false)}
+        >
+          <source src="https://cdn.bornsite.ru/static/backAInew.mp4" type="video/mp4" />
+        </video>
+      ) : (
+        <div
+          className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 z-0"
+          aria-hidden
+        />
+      )}
 
       {/* Dark Overlay */}
       <div className="absolute top-0 left-0 w-full h-full bg-navy/60 z-10"></div>
@@ -62,6 +82,7 @@ const HeroSection = () => {
           <ArrowDown className="h-6 w-6 text-white/60" />
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
 export default HeroSection;

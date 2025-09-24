@@ -3,63 +3,63 @@ import { Button } from "@/components/ui/button";
 import { Check, Star, Zap, Award } from "lucide-react";
 import { useState, useEffect } from "react";
 
+const PLANS = [
+  {
+    name: "Базовый",
+    price: "2,999",
+    period: "месяц",
+    description: "Идеально для начинающих",
+    isPopular: false,
+    features: [
+      "Доступ к базовым курсам",
+      "2 часа занятий в неделю",
+      "Чат поддержка",
+      "Сертификат об окончании",
+      "Мобильное приложение"
+    ]
+  },
+  {
+    name: "Стандарт",
+    price: "4,999",
+    period: "месяц",
+    description: "Самый популярный выбор",
+    isPopular: true,
+    features: [
+      "Доступ ко всем курсам",
+      "4 часа занятий в неделю",
+      "Персональный куратор",
+      "Практические проекты",
+      "Сертификат об окончании",
+      "Мобильное приложение",
+      "Группа в Telegram"
+    ]
+  },
+  {
+    name: "Премиум",
+    price: "7,999",
+    period: "месяц",
+    description: "Максимальный результат",
+    isPopular: false,
+    features: [
+      "Доступ ко всем курсам",
+      "Неограниченные занятия",
+      "Персональный ментор",
+      "1-на-1 консультации",
+      "Реальные проекты",
+      "Помощь в трудоустройстве",
+      "Сертификат об окончании",
+      "Мобильное приложение",
+      "VIP группа в Telegram"
+    ]
+  }
+] as const;
+
 const PricingSection = () => {
-  const [cardsVisible, setCardsVisible] = useState([false, false, false]);
+  const [cardsVisible, setCardsVisible] = useState<boolean[]>(() => Array(PLANS.length).fill(false));
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
-  const plans = [
-    {
-      name: "Базовый",
-      price: "2,999",
-      period: "месяц",
-      description: "Идеально для начинающих",
-      isPopular: false,
-      features: [
-        "Доступ к базовым курсам",
-        "2 часа занятий в неделю", 
-        "Чат поддержка",
-        "Сертификат об окончании",
-        "Мобильное приложение"
-      ]
-    },
-    {
-      name: "Стандарт",
-      price: "4,999", 
-      period: "месяц",
-      description: "Самый популярный выбор",
-      isPopular: true,
-      features: [
-        "Доступ ко всем курсам",
-        "4 часа занятий в неделю",
-        "Персональный куратор",
-        "Практические проекты",
-        "Сертификат об окончании",
-        "Мобильное приложение",
-        "Группа в Telegram"
-      ]
-    },
-    {
-      name: "Премиум",
-      price: "7,999",
-      period: "месяц", 
-      description: "Максимальный результат",
-      isPopular: false,
-      features: [
-        "Доступ ко всем курсам",
-        "Неограниченные занятия",
-        "Персональный ментор",
-        "1-на-1 консультации",
-        "Реальные проекты",
-        "Помощь в трудоустройстве",
-        "Сертификат об окончании",
-        "Мобильное приложение",
-        "VIP группа в Telegram"
-      ]
-    }
-  ];
-
   useEffect(() => {
-    const cardTimers = plans.map((_, index) => 
+    const cardTimers = PLANS.map((_, index) =>
       setTimeout(() => {
         setCardsVisible(prev => {
           const newState = [...prev];
@@ -111,7 +111,7 @@ const PricingSection = () => {
         </div>
 
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto items-stretch">
-          {plans.map((plan, index) => (
+          {PLANS.map((plan, index) => (
             <div
               key={index}
               className={`group relative transform transition-all duration-700 ${
