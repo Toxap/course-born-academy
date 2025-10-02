@@ -17,6 +17,28 @@ import {
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
+type ContactFormData = {
+  name: string;
+  email: string;
+  phone: string;
+  course: string;
+  message: string;
+  personalDataConsent: boolean;
+  termsConsent: boolean;
+  marketingConsent: boolean;
+};
+
+const DEFAULT_FORM_DATA: ContactFormData = {
+  name: "",
+  email: "",
+  phone: "",
+  course: "",
+  message: "",
+  personalDataConsent: false,
+  termsConsent: false,
+  marketingConsent: false
+};
+
 const COURSES = [
   "Python разработка",
   "Frontend разработка",
@@ -28,13 +50,7 @@ const COURSES = [
 
 const ContactFormSection = () => {
   const [visibleElements, setVisibleElements] = useState<number[]>([]);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    course: "",
-    message: ""
-  });
+  const [formData, setFormData] = useState<ContactFormData>({ ...DEFAULT_FORM_DATA });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
@@ -78,41 +94,63 @@ const ContactFormSection = () => {
     };
   }, []);
 
-  const handleInputChange = (field: string, value: string) => {
+  const handleInputChange = <K extends keyof ContactFormData>(field: K, value: ContactFormData[K]) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
 
-    // Симуляция отправки формы
-    await new Promise(resolve => setTimeout(resolve, 2000));
-
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    
-    toast({
-      title: "Заявка отправлена!",
-      description: "Мы свяжемся с вами в ближайшее время.",
-    });
-
-    // Сброс формы через 3 секунды
-    if (resetTimeoutRef.current) {
-      clearTimeout(resetTimeoutRef.current);
+    if (!formData.personalDataConsent || !formData.termsConsent) {
+      toast({
+        variant: "destructive",
+        title: "Нельзя отправить заявку",
+        description: "Нужно согласиться с условиями обработки данных и правилами обучения."
+      });
+      return;
     }
 
-    resetTimeoutRef.current = window.setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        course: "",
-        message: ""
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("http://localhost:8000/contact-requests", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
       });
-      resetTimeoutRef.current = null;
-    }, 3000);
+
+      if (!response.ok) {
+        throw new Error("Не удалось отправить заявку");
+      }
+
+      setIsSubmitted(true);
+
+      toast({
+        title: "Заявка отправлена!",
+        description: "Мы свяжемся с вами в ближайшее время.",
+      });
+
+      // Сброс формы через 3 секунды
+      if (resetTimeoutRef.current) {
+        clearTimeout(resetTimeoutRef.current);
+      }
+
+      resetTimeoutRef.current = window.setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData({ ...DEFAULT_FORM_DATA });
+        resetTimeoutRef.current = null;
+      }, 3000);
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Ошибка",
+        description: error instanceof Error ? error.message : "Попробуйте отправить заявку позже"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   useEffect(() => {
@@ -279,10 +317,51 @@ const ContactFormSection = () => {
                         />
                       </div>
 
+                      {/* Consent checkboxes */}
+                      <div className="space-y-3 bg-slate-900/40 border border-red-900/40 rounded-xl p-4">
+                        <label className="flex items-start gap-3 text-sm text-gray-300">
+                          <input
+                            type="checkbox"
+                            checked={formData.personalDataConsent}
+                            onChange={(e) => handleInputChange("personalDataConsent", e.target.checked)}
+                            required
+                            className="mt-1 h-4 w-4 rounded border-red-900/60 bg-slate-800 text-red-500 focus:ring-red-600"
+                          />
+                          <span>
+                            Я соглашаюсь на обработку моих персональных данных и принимаю условия политики конфиденциальности
+                          </span>
+                        </label>
+
+                        <label className="flex items-start gap-3 text-sm text-gray-300">
+                          <input
+                            type="checkbox"
+                            checked={formData.termsConsent}
+                            onChange={(e) => handleInputChange("termsConsent", e.target.checked)}
+                            required
+                            className="mt-1 h-4 w-4 rounded border-red-900/60 bg-slate-800 text-red-500 focus:ring-red-600"
+                          />
+                          <span>
+                            Подтверждаю, что ознакомлен с правилами обучения и согласен соблюдать их
+                          </span>
+                        </label>
+
+                        <label className="flex items-start gap-3 text-sm text-gray-400">
+                          <input
+                            type="checkbox"
+                            checked={formData.marketingConsent}
+                            onChange={(e) => handleInputChange("marketingConsent", e.target.checked)}
+                            className="mt-1 h-4 w-4 rounded border-red-900/60 bg-slate-800 text-red-500 focus:ring-red-600"
+                          />
+                          <span>Хочу получать полезные материалы и спецпредложения на email</span>
+                        </label>
+                      </div>
+
                       {/* Submit button */}
                       <Button
                         type="submit"
-                        disabled={isSubmitting}
+                        disabled={
+                          isSubmitting || !formData.personalDataConsent || !formData.termsConsent
+                        }
                         className="w-full h-12 bg-red-600 hover:bg-red-700 text-white font-semibold text-lg relative overflow-hidden group transition-all duration-300"
                       >
                         <div className="absolute inset-0 bg-gradient-to-r from-red-600 via-red-500 to-red-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
