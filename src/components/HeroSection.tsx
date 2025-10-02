@@ -2,9 +2,16 @@ import { useCallback, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowDown } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
+type HeroSectionProps = {
+  user?: {
+    name?: string;
+    avatar?: string;
+  } | null;
+};
 
-const HeroSection = () => {
+const HeroSection = ({ user }: HeroSectionProps) => {
   const [isVideoAvailable, setIsVideoAvailable] = useState(true);
   const navigate = useNavigate();
 
@@ -71,13 +78,33 @@ const HeroSection = () => {
 
       {/* Login Button */}
       <div className="absolute top-8 right-8 z-20">
-        <Button 
-          variant="ghost"
-          onClick={() => navigate("/login")}
-          className="text-white/80 hover:text-white hover:bg-white/10 border border-white/20 hover:border-white/40 backdrop-blur-sm"
-        >
-          Войти
-        </Button>
+        {user ? (
+          <button
+            type="button"
+            onClick={() => navigate("/dashboard")}
+            className="flex items-center justify-center rounded-full border border-white/30 bg-white/10 p-0.5 transition hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+            aria-label="Перейти в личный кабинет"
+          >
+            <Avatar className="h-11 w-11 border border-white/30">
+              <AvatarImage
+                src={user.avatar}
+                alt={user.name}
+                className="object-cover"
+              />
+              <AvatarFallback className="bg-navy text-white text-sm font-medium">
+                {user.name?.[0]?.toUpperCase() ?? "?"}
+              </AvatarFallback>
+            </Avatar>
+          </button>
+        ) : (
+          <Button
+            variant="ghost"
+            onClick={() => navigate("/login")}
+            className="text-white/80 hover:text-white hover:bg-white/10 border border-white/20 hover:border-white/40 backdrop-blur-sm"
+          >
+            Войти
+          </Button>
+        )}
       </div>
 
       {/* Scroll Indicator */}
