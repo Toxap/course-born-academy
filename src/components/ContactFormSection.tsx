@@ -113,12 +113,23 @@ const ContactFormSection = () => {
     setIsSubmitting(true);
 
     try {
+      const payload = {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        course: formData.course,
+        message: formData.message.trim() || undefined,
+        personal_data_consent: formData.personalDataConsent,
+        terms_consent: formData.termsConsent,
+        marketing_consent: formData.marketingConsent
+      };
+
       const response = await fetch("http://localhost:8000/contact-requests", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(payload)
       });
 
       if (!response.ok) {
