@@ -1,4 +1,15 @@
-from sqlalchemy import Boolean, Column, DateTime, Integer, String, Text, func
+from sqlalchemy import (
+    Boolean,
+    Column,
+    DateTime,
+    ForeignKey,
+    Integer,
+    String,
+    Text,
+    func,
+)
+from sqlalchemy.orm import relationship
+
 from database import Base
 
 class User(Base):
@@ -9,7 +20,38 @@ class User(Base):
     avatar = Column(String, default="")
     hashed_password = Column(String, nullable=False)
 
-# TODO: позже добавить модель Course, если будем хранить курсы в БД
+class Course(Base):
+    __tablename__ = "courses"
+
+    id = Column(Integer, primary_key=True, index=True)
+    title = Column(String, nullable=False)
+    description = Column(Text, default="")
+    progress = Column(Integer, nullable=False, default=0)
+    thumbnail = Column(String, default="")
+
+    lessons = relationship(
+        "Lesson",
+        back_populates="course",
+        cascade="all, delete-orphan",
+        order_by="Lesson.order",
+    )
+
+
+class Lesson(Base):
+    __tablename__ = "lessons"
+
+    id = Column(Integer, primary_key=True, index=True)
+    course_id = Column(
+        Integer,
+        ForeignKey("courses.id", ondelete="CASCADE"),
+        nullable=False,
+        index=True,
+    )
+    title = Column(String, nullable=False)
+    video_url = Column(String, nullable=False)
+    order = Column(Integer, nullable=False, default=0)
+
+    course = relationship("Course", back_populates="lessons")
 
 
 class ContactRequest(Base):
