@@ -1,5 +1,7 @@
 from datetime import datetime
-from pydantic import BaseModel
+from typing import List
+
+from pydantic import BaseModel, Field, HttpUrl
 
 class UserCreate(BaseModel):
     name: str
@@ -18,7 +20,33 @@ class UserOut(BaseModel):
     class Config:
         orm_mode = True
 
-# TODO: добавить схемы для Course, когда будем хранить в БД
+class LessonOut(BaseModel):
+    id: int
+    title: str
+    video_url: HttpUrl
+    order: int = Field(0, description="Порядок урока в курсе")
+
+    class Config:
+        orm_mode = True
+
+
+class CourseBase(BaseModel):
+    id: int
+    title: str
+    description: str | None = ""
+    progress: int = 0
+    thumbnail: str | None = None
+
+    class Config:
+        orm_mode = True
+
+
+class CourseListItem(CourseBase):
+    pass
+
+
+class CourseDetail(CourseBase):
+    lessons: List[LessonOut]
 
 
 class ContactRequestBase(BaseModel):
