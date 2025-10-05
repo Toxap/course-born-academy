@@ -1,24 +1,35 @@
 from datetime import datetime
 from typing import List
 
-from pydantic import BaseModel, Field, HttpUrl
+from pydantic import BaseModel, EmailStr, Field, HttpUrl
 
 class UserCreate(BaseModel):
     name: str
-    email: str
+    email: EmailStr
     password: str
 
+
 class UserLogin(BaseModel):
-    email: str
+    email: EmailStr
     password: str
+
 
 class UserOut(BaseModel):
     id: int
     name: str
     email: str
     avatar: str
+    is_admin: bool
+
     class Config:
         orm_mode = True
+
+
+class UserUpdate(BaseModel):
+    name: str | None = None
+    email: EmailStr | None = None
+    avatar: str | None = None
+    is_admin: bool | None = None
 
 class LessonOut(BaseModel):
     id: int
@@ -28,6 +39,22 @@ class LessonOut(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class LessonCreate(BaseModel):
+    title: str
+    video_url: HttpUrl
+    order: int | None = Field(
+        default=None, description="Необязательный порядковый номер урока"
+    )
+
+
+class LessonUpdate(BaseModel):
+    title: str | None = None
+    video_url: HttpUrl | None = None
+    order: int | None = Field(
+        default=None, description="Новый порядковый номер урока"
+    )
 
 
 class CourseBase(BaseModel):
@@ -47,6 +74,21 @@ class CourseListItem(CourseBase):
 
 class CourseDetail(CourseBase):
     lessons: List[LessonOut]
+
+
+class CourseCreate(BaseModel):
+    title: str
+    description: str | None = ""
+    progress: int = 0
+    thumbnail: str | None = None
+    lessons: List[LessonCreate] = []
+
+
+class CourseUpdate(BaseModel):
+    title: str | None = None
+    description: str | None = None
+    progress: int | None = None
+    thumbnail: str | None = None
 
 
 class ContactRequestBase(BaseModel):

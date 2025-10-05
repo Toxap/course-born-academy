@@ -1,8 +1,23 @@
+import type { Dispatch, SetStateAction } from "react";
+
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
 
-export default function ProfileModal({ theme, user, setUser, setIsProfileOpen }) {
+import type { DashboardUser } from "./UserDashboard";
+
+interface ProfileModalProps {
+  theme: string;
+  user: DashboardUser | null;
+  setUser: Dispatch<SetStateAction<DashboardUser | null>>;
+  setIsProfileOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+export default function ProfileModal({ theme, user, setUser, setIsProfileOpen }: ProfileModalProps) {
+  if (!user) {
+    return null;
+  }
+
   const handleSave = (e) => {
     e.preventDefault();
     setIsProfileOpen(false);
@@ -32,7 +47,7 @@ export default function ProfileModal({ theme, user, setUser, setIsProfileOpen })
           <input
             type="text"
             value={user.name}
-            onChange={(e) => setUser({ ...user, name: e.target.value })}
+            onChange={(e) => setUser((prev) => (prev ? { ...prev, name: e.target.value } : prev))}
             placeholder="Имя"
             className={`${
               theme === "dark"
@@ -42,9 +57,24 @@ export default function ProfileModal({ theme, user, setUser, setIsProfileOpen })
           />
           <input
             type="text"
-            value={user.avatar}
-            onChange={(e) => setUser({ ...user, avatar: e.target.value })}
+            value={user.avatar ?? ""}
+            onChange={(e) =>
+              setUser((prev) => (prev ? { ...prev, avatar: e.target.value } : prev))
+            }
             placeholder="URL аватарки"
+            className={`${
+              theme === "dark"
+                ? "bg-gray-800 border-red-700 text-white"
+                : "bg-gray-100 border-gray-300 text-black"
+            } p-3 rounded-lg`}
+          />
+          <input
+            type="email"
+            value={user.email}
+            onChange={(e) =>
+              setUser((prev) => (prev ? { ...prev, email: e.target.value } : prev))
+            }
+            placeholder="Email"
             className={`${
               theme === "dark"
                 ? "bg-gray-800 border-red-700 text-white"

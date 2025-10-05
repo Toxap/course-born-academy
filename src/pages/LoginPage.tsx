@@ -22,7 +22,8 @@ const LoginPage = () => {
     const user = await res.json();
 
     // TODO: позже заменить на JWT
-    localStorage.setItem("userId", user.id);
+    localStorage.setItem("userId", String(user.id));
+    localStorage.setItem("user", JSON.stringify(user));
 
     navigate("/dashboard");
   } catch (err) {

@@ -20,7 +20,13 @@ def register(user: UserCreate, db: Session = Depends(get_db)):
     if db_user:
         raise HTTPException(status_code=400, detail="Email уже зарегистрирован")
     hashed_pw = argon2.hash(user.password)
-    new_user = User(name=user.name, email=user.email, hashed_password=hashed_pw)
+    is_first_user = db.query(User).count() == 0
+    new_user = User(
+        name=user.name,
+        email=user.email,
+        hashed_password=hashed_pw,
+        is_admin=is_first_user,
+    )
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
