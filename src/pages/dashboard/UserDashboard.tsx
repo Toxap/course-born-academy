@@ -1,54 +1,92 @@
-import { useState, useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+
 import Sidebar from "./Sidebar";
 import MainContent from "./MainContent";
 import ProfileModal from "./ProfileModal";
-import { useNavigate } from "react-router-dom";
 
+export interface DashboardUser {
+  id: number;
+  name: string;
+  email: string;
+  avatar: string;
+  is_admin: boolean;
+  password?: string;
+}
 
 export default function UserDashboard() {
   const [theme, setTheme] = useState("dark");
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [activePage, setActivePage] = useState("courses");
   const [profileTab, setProfileTab] = useState("info");
+  const [user, setUser] = useState<DashboardUser | null>(() => {
+    const storedUser = localStorage.getItem("user");
+    if (!storedUser) {
+      return null;
+    }
+    try {
+      return JSON.parse(storedUser) as DashboardUser;
+    } catch (error) {
+      console.warn("Не удалось прочитать пользователя из localStorage", error);
+      return null;
+    }
+  });
+
   const navigate = useNavigate();
 
-  interface User {
-  id: number;
-  name: string;
-  avatar: string;
-  password?: string;
-}
-
-const [user, setUser] = useState<User | null>(null);
-
   useEffect(() => {
-  const userId = localStorage.getItem("userId");
-  if (!userId) {
-    navigate("/login");
-    return;
-  }
+    const userId = localStorage.getItem("userId");
+    if (!userId) {
+      navigate("/login");
+      return;
+    }
 
-  fetch(`http://localhost:8000/users/${userId}`)
-    .then(res => res.json())
-    .then(data => setUser(data))
-    .catch(() => navigate("/login"));
-}, []);
+    fetch(`http://localhost:8000/users/${userId}`)
+      .then((res) => {
+        if (!res.ok) throw new Error("Unauthorized");
+        return res.json();
+      })
+      .then((data: DashboardUser) => {
+        setUser(data);
+        localStorage.setItem("user", JSON.stringify(data));
+      })
+      .catch(() => navigate("/login"));
+  }, [navigate]);
 
   // Загружаем тему
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) setTheme(savedTheme);
-    else {
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      setTheme(prefersDark ? "dark" : "light");
+    if (savedTheme) {
+      setTheme(savedTheme);
+      return;
     }
+
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    setTheme(prefersDark ? "dark" : "light");
   }, []);
 
   // Сохраняем тему
   useEffect(() => {
     localStorage.setItem("theme", theme);
   }, [theme]);
+
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem("user", JSON.stringify(user));
+    }
+  }, [user]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("userId");
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
+
+  const themeClasses = useMemo(
+    () => (theme === "dark" ? "bg-black text-white" : "bg-white text-black"),
+    [theme],
+  );
 
   return (
     <AnimatePresence mode="wait">
@@ -58,7 +96,7 @@ const [user, setUser] = useState<User | null>(null);
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.4 }}
-        className={`${theme === "dark" ? "bg-black text-white" : "bg-white text-black"} min-h-screen flex relative overflow-hidden`}
+        className={`${themeClasses} min-h-screen flex relative overflow-hidden`}
       >
         <Sidebar
           user={user}
@@ -66,6 +104,7 @@ const [user, setUser] = useState<User | null>(null);
           setTheme={setTheme}
           setIsProfileOpen={setIsProfileOpen}
           setActivePage={setActivePage}
+          onLogout={handleLogout}
         />
         <MainContent
           activePage={activePage}
@@ -73,6 +112,7 @@ const [user, setUser] = useState<User | null>(null);
           user={user}
           profileTab={profileTab}
           setProfileTab={setProfileTab}
+          setUser={setUser}
         />
         {isProfileOpen && (
           <ProfileModal

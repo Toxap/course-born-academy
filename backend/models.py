@@ -19,6 +19,7 @@ class User(Base):
     email = Column(String, unique=True, index=True, nullable=False)
     avatar = Column(String, default="")
     hashed_password = Column(String, nullable=False)
+    is_admin = Column(Boolean, nullable=False, default=False)
 
 class Course(Base):
     __tablename__ = "courses"

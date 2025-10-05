@@ -1,10 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routers import auth, users, courses, contact_requests
-from database import Base, engine
+from database import Base, engine, ensure_user_admin_column
 
 # Создание таблиц
 Base.metadata.create_all(bind=engine)
+ensure_user_admin_column()
 
 app = FastAPI(title="Courseborn API")
 

@@ -27,7 +27,8 @@ const RegisterPage = () => {
     if (!res.ok) throw new Error("Ошибка регистрации");
     const user = await res.json();
 
-    localStorage.setItem("userId", user.id);
+    localStorage.setItem("userId", String(user.id));
+    localStorage.setItem("user", JSON.stringify(user));
 
     navigate("/dashboard");
   } catch (err) {

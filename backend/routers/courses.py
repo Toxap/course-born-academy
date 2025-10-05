@@ -1,11 +1,19 @@
 from typing import List
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, Header, HTTPException, status
 from sqlalchemy.orm import Session, selectinload
 
 from database import SessionLocal
-from models import Course, Lesson
-from schemas import CourseDetail, CourseListItem
+from models import Course, Lesson, User
+from schemas import (
+    CourseCreate,
+    CourseDetail,
+    CourseListItem,
+    CourseUpdate,
+    LessonCreate,
+    LessonOut,
+    LessonUpdate,
+)
 
 router = APIRouter()
 
@@ -16,6 +24,19 @@ def get_db():
         yield db
     finally:
         db.close()
+
+
+def require_admin(
+    x_user_id: int = Header(..., alias="X-User-Id"),
+    db: Session = Depends(get_db),
+):
+    admin = db.query(User).filter(User.id == x_user_id).first()
+    if not admin or not admin.is_admin:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Только администраторы могут выполнять это действие",
+        )
+    return admin
 
 
 def seed_courses(db: Session) -> None:
@@ -114,4 +135,153 @@ def get_course(course_id: int, db: Session = Depends(get_db)):
     )
     if course is None:
         raise HTTPException(status_code=404, detail="Курс не найден")
+    course.lessons.sort(key=lambda lesson: lesson.order)
     return course
+
+
+def _get_course_with_lessons(db: Session, course_id: int) -> Course:
+    course = (
+        db.query(Course)
+        .options(selectinload(Course.lessons))
+        .filter(Course.id == course_id)
+        .first()
+    )
+    if course is None:
+        raise HTTPException(status_code=404, detail="Курс не найден")
+    course.lessons.sort(key=lambda lesson: lesson.order)
+    return course
+
+
+@router.post("/", response_model=CourseDetail, status_code=status.HTTP_201_CREATED)
+def create_course(
+    course_in: CourseCreate,
+    _: User = Depends(require_admin),
+    db: Session = Depends(get_db),
+):
+    course = Course(
+        title=course_in.title,
+        description=course_in.description or "",
+        progress=course_in.progress or 0,
+        thumbnail=course_in.thumbnail or "",
+    )
+    db.add(course)
+    db.flush()
+
+    for index, lesson_data in enumerate(course_in.lessons, start=1):
+        order = lesson_data.order if lesson_data.order is not None else index
+        lesson = Lesson(
+            title=lesson_data.title,
+            video_url=str(lesson_data.video_url),
+            order=order,
+        )
+        course.lessons.append(lesson)
+
+    db.commit()
+    return _get_course_with_lessons(db, course.id)
+
+
+@router.patch("/{course_id}", response_model=CourseDetail)
+def update_course(
+    course_id: int,
+    payload: CourseUpdate,
+    _: User = Depends(require_admin),
+    db: Session = Depends(get_db),
+):
+    course = _get_course_with_lessons(db, course_id)
+    update_data = payload.dict(exclude_unset=True)
+
+    for field, value in update_data.items():
+        setattr(course, field, value)
+
+    db.commit()
+    db.refresh(course)
+    return _get_course_with_lessons(db, course_id)
+
+
+@router.delete("/{course_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_course(
+    course_id: int,
+    _: User = Depends(require_admin),
+    db: Session = Depends(get_db),
+):
+    course = db.query(Course).filter(Course.id == course_id).first()
+    if course is None:
+        raise HTTPException(status_code=404, detail="Курс не найден")
+    db.delete(course)
+    db.commit()
+
+
+@router.post(
+    "/{course_id}/lessons",
+    response_model=CourseDetail,
+    status_code=status.HTTP_201_CREATED,
+)
+def create_lesson(
+    course_id: int,
+    payload: LessonCreate,
+    _: User = Depends(require_admin),
+    db: Session = Depends(get_db),
+):
+    course = _get_course_with_lessons(db, course_id)
+    max_order = max((lesson.order for lesson in course.lessons), default=0)
+    order = payload.order if payload.order is not None else max_order + 1
+    lesson = Lesson(
+        title=payload.title,
+        video_url=str(payload.video_url),
+        order=order,
+    )
+    course.lessons.append(lesson)
+    db.add(lesson)
+    db.commit()
+    return _get_course_with_lessons(db, course_id)
+
+
+@router.patch(
+    "/{course_id}/lessons/{lesson_id}",
+    response_model=LessonOut,
+)
+def update_lesson(
+    course_id: int,
+    lesson_id: int,
+    payload: LessonUpdate,
+    _: User = Depends(require_admin),
+    db: Session = Depends(get_db),
+):
+    lesson = (
+        db.query(Lesson)
+        .filter(Lesson.id == lesson_id, Lesson.course_id == course_id)
+        .first()
+    )
+    if lesson is None:
+        raise HTTPException(status_code=404, detail="Урок не найден")
+
+    update_data = payload.dict(exclude_unset=True)
+    for field, value in update_data.items():
+        if field == "video_url" and value is not None:
+            value = str(value)
+        setattr(lesson, field, value)
+
+    db.commit()
+    db.refresh(lesson)
+    return lesson
+
+
+@router.delete(
+    "/{course_id}/lessons/{lesson_id}",
+    status_code=status.HTTP_204_NO_CONTENT,
+)
+def delete_lesson(
+    course_id: int,
+    lesson_id: int,
+    _: User = Depends(require_admin),
+    db: Session = Depends(get_db),
+):
+    lesson = (
+        db.query(Lesson)
+        .filter(Lesson.id == lesson_id, Lesson.course_id == course_id)
+        .first()
+    )
+    if lesson is None:
+        raise HTTPException(status_code=404, detail="Урок не найден")
+    db.delete(lesson)
+    db.commit()
