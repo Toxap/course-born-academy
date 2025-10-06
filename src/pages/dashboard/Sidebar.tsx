@@ -3,6 +3,7 @@ import type { Dispatch, SetStateAction } from "react";
 import { Button } from "@/components/ui/button";
 import {
   BookOpen,
+  CalendarDays,
   Edit3,
   Home,
   LogOut,
@@ -83,6 +84,12 @@ export default function Sidebar({
           className="flex items-center gap-2 hover:text-red-400"
         >
           <BookOpen className="w-5 h-5" /> Курсы
+        </button>
+        <button
+          onClick={() => setActivePage("webinars")}
+          className="flex items-center gap-2 hover:text-red-400"
+        >
+          <CalendarDays className="w-5 h-5" /> Вебинары
         </button>
         <button
           onClick={() => setActivePage("profile")}
