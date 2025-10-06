@@ -5,6 +5,7 @@ import CoursesSection from "./sections/CoursesSection";
 import ProfileSection from "./sections/ProfileSection";
 import HomeSection from "./sections/HomeSection";
 import AdminSection from "./sections/AdminSection";
+import WebinarsSection from "./sections/WebinarsSection";
 import type { DashboardUser } from "./UserDashboard";
 
 interface MainContentProps {
@@ -37,6 +38,7 @@ export default function MainContent({
         />
       )}
       {activePage === "home" && <HomeSection user={user} />}
+      {activePage === "webinars" && <WebinarsSection />}
       {activePage === "admin" && (
         <AdminSection theme={theme} user={user} setUser={setUser} />
       )}
